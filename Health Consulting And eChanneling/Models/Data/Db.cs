@@ -9,5 +9,6 @@ namespace Health_Consulting_And_eChanneling.Models.Data
     public class Db: DbContext
     {
         public DbSet<PageDTO> Pages { get; set; }
+        public DbSet<SidebarDTO> Sidebar { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace Health_Consulting_And_eChanneling.Models.ViewModels.Pages
             Slug = row.Slug;
             Body = row.Body;
             Sorting = row.Sorting;
-            row.HasSidebar = HasSidebar;
+            HasSidebar = row.HasSidebar;
         }
         public int Id { get; set; }
         [Required]

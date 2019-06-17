@@ -17,15 +17,17 @@
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
 .left_sidebar {
     margin-top: 20px;
     font-style: none;
     list-style: none;
     color: #FF9800;
     font-size: 18px;
+}
+.sub_page_title {
+    font-size: 24px;
+    color: #93ce4e;
+}
+.radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
+    margin-left: 1px;
 }

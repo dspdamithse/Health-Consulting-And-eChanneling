@@ -24,10 +24,35 @@
     color: #FF9800;
     font-size: 18px;
 }
+.left_sidebar li {
+    padding: 5px;
+}
 .sub_page_title {
     font-size: 24px;
     color: #93ce4e;
 }
 .radio input[type="radio"], .radio-inline input[type="radio"], .checkbox input[type="checkbox"], .checkbox-inline input[type="checkbox"] {
     margin-left: 1px;
+}
+table.sorting tr:not(.home) {
+    cursor: pointer;
+}
+.form-group {
+    margin-bottom: 1px;
+}
+.ui-state-highlight {
+    border: 1px dashed #ccc;
+}
+
+div.new-cat {
+    margin-top: 32px;
+    position: relative;
+}
+
+span.ajax-text {
+    display: none;
+}
+
+.ajaxdivtd {
+    position: absolute;
 }

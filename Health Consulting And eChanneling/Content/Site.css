@@ -22,3 +22,10 @@ select,
 textarea {
     max-width: 280px;
 }
+.left_sidebar {
+    margin-top: 20px;
+    font-style: none;
+    list-style: none;
+    color: #FF9800;
+    font-size: 18px;
+}

@@ -1,0 +1,102 @@
+﻿@model IEnumerable<Health_Consulting_And_eChanneling.Models.ViewModels.Shop.ProductViewModel>
+
+@{
+    ViewBag.Title = "Products";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+@using PagedList.Mvc;
+@using PagedList;
+<h2 class="sub_page_title">Products</h2>
+
+<select id="SelectCategory" name="SelectCategory">
+    <option value="0">All</option>
+    @foreach (var item in ViewBag.Categories)
+    {
+        if (ViewBag.SelectedCat == item.Value)
+        {
+            <option selected="selected" value="@item.Value">@item.Text</option>
+        }
+        else
+        {
+            <option value="@item.Value">@item.Text</option>
+        }
+    }
+    }
+</select>
+<br /><br /><br />
+
+<p>
+    @Html.ActionLink("Add New Product", "AddProduct")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Price
+        </th>
+
+        <th>
+            Image Name
+        </th>
+        <th>
+            Action
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var product in ViewBag.OnePageOfProducts)
+    {
+        <tr>
+            <td>
+                @product.Name
+            </td>
+            <td>
+                @product.Description
+            </td>
+            <td>
+                Rs. @product.Price
+            </td>
+            <td>
+                <a href="/administrator/shop/EditProduct/@product.Id">
+                    <img src="/Images/Uploads/Products/@product.Id/Thumbs/@product.ImageName" alt="Alternate Text" />
+                </a>
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditProduct", new { id = product.Id }) |
+                @Html.ActionLink("Delete", "DeleteProduct", new { id = product.Id }, new { @class = "delete" })
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("Products", new { page, catId = ViewBag.SelectedCat }))
+@section scripts
+    {
+
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <script>
+        $(function () {
+
+            $("#SelectCategory").on("change", function () {
+                var url = $(this).val();
+
+                if (url) {
+                    window.location = "/administrator/shop/products?catId="+url;
+                }
+                return false;
+            });
+            ////////////////////////////////////////////////////////////////////////
+            $("a.delete").click(function () {
+                if (!confirm("Are you sure you need to delete this"))
+                    return false;
+            });
+            ////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////
+        });
+    </script>
+}

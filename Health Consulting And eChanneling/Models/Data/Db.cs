@@ -12,5 +12,7 @@ namespace Health_Consulting_And_eChanneling.Models.Data
         public DbSet<SidebarDTO> Sidebar { get; set; }
         public DbSet<CategoryDTO> Categories { get; set; }
         public DbSet<ProductDTO> Products { get; set; }
+        public DbSet<SpecialistAreaDTO> SpecialistArea { get; set; }
+
     }
 }

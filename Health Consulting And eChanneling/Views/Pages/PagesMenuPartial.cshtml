@@ -1,0 +1,6 @@
+﻿@model IEnumerable<Health_Consulting_And_eChanneling.Models.ViewModels.Pages.PageViewModel>
+
+@foreach (var item in Model) {
+    <li><a href="/@item.Slug">@item.Title</a></li>
+}
+

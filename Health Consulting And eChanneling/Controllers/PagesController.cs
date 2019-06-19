@@ -41,5 +41,20 @@ namespace Health_Consulting_And_eChanneling.Controllers
             model = new PageViewModel(dto);
             return View(model);
         }
+
+        public ActionResult PagesMenuPartial()
+        {
+            List<PageViewModel> pageViewModelList;
+
+            using (Db db=new Db())
+            {
+                pageViewModelList = db.Pages.ToArray().OrderBy(x => x.Sorting)
+                                                      .Where(x => x.Slug != "home")
+                                                      .Select(x=>new PageViewModel(x))
+                                                      .ToList();
+
+            }
+            return PartialView(pageViewModelList);
+        }
     }
 }

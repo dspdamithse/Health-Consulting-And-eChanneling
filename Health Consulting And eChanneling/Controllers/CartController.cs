@@ -108,6 +108,7 @@ namespace Health_Consulting_And_eChanneling.Controllers
                 return Json(result, JsonRequestBehavior.AllowGet);
             }          
         }
+        
         public ActionResult DecrementProduct(int productId)
         {
             List<CartViewModel> cart = Session["cart"] as List<CartViewModel>;
@@ -124,6 +125,17 @@ namespace Health_Consulting_And_eChanneling.Controllers
                 }
                 var result = new { qty = model.Quantity, price = model.Price };
                 return Json(result, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public void RemoveProduct(int productId)
+        {
+            List<CartViewModel> cart = Session["cart"] as List<CartViewModel>;
+            using (Db db = new Db())
+            {
+                CartViewModel model = cart.FirstOrDefault(x => x.ProductId == productId);
+
+                cart.Remove(model);
             }
         }
     }

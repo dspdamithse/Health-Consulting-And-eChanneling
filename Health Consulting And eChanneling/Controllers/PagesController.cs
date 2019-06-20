@@ -10,7 +10,6 @@ namespace Health_Consulting_And_eChanneling.Controllers
 {
     public class PagesController : Controller
     {
-        // GET: Pages
         public ActionResult Index(string page="")
         {
             if (page == "")
@@ -41,7 +40,6 @@ namespace Health_Consulting_And_eChanneling.Controllers
             model = new PageViewModel(dto);
             return View(model);
         }
-
         public ActionResult PagesMenuPartial()
         {
             List<PageViewModel> pageViewModelList;
@@ -55,6 +53,17 @@ namespace Health_Consulting_And_eChanneling.Controllers
 
             }
             return PartialView(pageViewModelList);
+        }
+        public ActionResult SidebarPartial()
+        {
+            SidebarViewModel model;
+            using (Db db=new Db())
+            {
+                SidebarDTO dto = db.Sidebar.Find(1);
+                model = new SidebarViewModel(dto);
+
+            }
+            return PartialView(model);
         }
     }
 }

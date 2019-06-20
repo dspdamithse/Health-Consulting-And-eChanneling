@@ -59,3 +59,14 @@ span.ajax-text {
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
     padding: 15px 7px;
 }
+span.loader{
+    display:none;
+}
+span.ajaxmsg{
+    background:green;
+    color:white;
+    padding:10px;
+    display:none;
+    position:absolute;
+    bottom:0;
+}

@@ -1,0 +1,7 @@
+﻿@model Health_Consulting_And_eChanneling.Models.ViewModels.Cart.CartViewModel
+
+<div class="ajaxcart" style="color:white; top:5px; position: relative;">
+    Your Cart: @Model.Quantity Item(s): Rs. @Model.Price
+    <br />
+    @Html.ActionLink("CheckOut", "Index")
+</div>

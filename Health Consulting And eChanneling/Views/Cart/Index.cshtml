@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Health_Consulting_And_eChanneling.Models.ViewModels.Cart.CartViewModel>
+
+@{
+    ViewBag.Title = "Cart Details";
+}
+
+<h2>Cart Details</h2>
+@if (ViewBag.Message != null)
+{
+<h4>@ViewBag.Message</h4>
+}
+else
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Image
+            </th>
+            <th>
+                Action
+            </th>
+            <th>
+                Total
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td class="qty@(item.ProductId)">
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            <img src="/Images/Uploads/Products/@item.ProductId/Thumbs/@item.Image" />
+        </td>
+        <td>
+            <a href="#" class="increproduct" data-id="@item.ProductId">+</a>
+            <a href="#" class="decreproduct" data-id="@item.ProductId">-</a>
+            <a href="#" class="removeproduct" data-id="@item.ProductId">Remove</a>
+        </td>
+        <td class="total@(item.ProductId)">
+            @Html.DisplayFor(modelItem => item.Total)
+        </td>
+    </tr>
+        }
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="grandtotal"><b>Grand Total </b><span> Rs.@ViewBag.GrandTotal</span></td>
+        </tr>
+
+    </table>
+}

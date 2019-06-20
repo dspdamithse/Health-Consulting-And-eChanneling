@@ -7,7 +7,7 @@
 <h2>Cart Details</h2>
 @if (ViewBag.Message != null)
 {
-<h4>@ViewBag.Message</h4>
+    <h4>@ViewBag.Message</h4>
 }
 else
 {
@@ -38,28 +38,28 @@ else
 
         @foreach (var item in Model)
         {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductName)
-        </td>
-        <td class="qty@(item.ProductId)">
-            @Html.DisplayFor(modelItem => item.Quantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            <img src="/Images/Uploads/Products/@item.ProductId/Thumbs/@item.Image" />
-        </td>
-        <td>
-            <a href="#" class="increproduct" data-id="@item.ProductId">+</a>
-            <a href="#" class="decreproduct" data-id="@item.ProductId">-</a>
-            <a href="#" class="removeproduct" data-id="@item.ProductId">Remove</a>
-        </td>
-        <td class="total@(item.ProductId)">
-            @Html.DisplayFor(modelItem => item.Total)
-        </td>
-    </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td class="qty@(item.ProductId)">
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <img src="/Images/Uploads/Products/@item.ProductId/Thumbs/@item.Image" />
+                </td>
+                <td>
+                    <a href="#" class="increproduct" data-id="@item.ProductId">+</a>
+                    <a href="#" class="decreproduct" data-id="@item.ProductId">-</a>
+                    <a href="#" class="removeproduct" data-id="@item.ProductId">Remove</a>
+                </td>
+                <td class="total@(item.ProductId)">
+                    @Html.DisplayFor(modelItem => item.Total)
+                </td>
+            </tr>
         }
         <tr>
             <td></td>
@@ -71,4 +71,72 @@ else
         </tr>
 
     </table>
+}
+@section scripts
+    {
+
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <script>
+        $(function () {
+            $("a.increproduct").click(function (e) {
+                e.preventDefault();
+
+                var productId = $(this).data("id");
+                var url = "/Cart/IncrementProduct";
+
+                $.getJSON(url, { productId: productId }, function (data) {
+
+                    $("td.qty" + productId).html(data.qty);
+
+                    var price = data.qty * data.price;
+                    var priceHtml = "Rs. " + price.toFixed(2);
+
+                    $("td.total" + productId).html(priceHtml);
+
+                    var gt = parseFloat($("td.grandtotal span").text());
+
+                    var grandtotal = (gt + data.price).toFixed(2);
+
+                    $("td.grandtotal span").text(grandtotal);
+                    location.reload();
+                });
+            });
+            ////////////////////////////////////////////////////////////////////////
+            $("a.decreproduct").click(function (e) {
+                e.preventDefault();
+
+                var $this = $(this);
+                var productId = $(this).data("id");
+                var url = "/Cart/DecrementProduct";
+
+                $.getJSON(url, { productId: productId }, function (data) {
+
+                    if (data.qty == 0) {
+                        $this.parent().parent().fadeOut("fast", function () {
+                            location.reload();
+                        });
+                    }
+                    else{
+
+                    $("td.qty" + productId).html(data.qty);
+
+                    var price = data.qty * data.price;
+                    var priceHtml = "Rs. " + price.toFixed(2);
+
+                    $("td.total" + productId).html(priceHtml);
+
+                    var gt = parseFloat($("td.grandtotal span").text());
+
+                    var grandtotal = (gt - data.price).toFixed(2);
+
+                        $("td.grandtotal span").text(grandtotal);
+                        location.reload();
+
+                    }
+                });
+            });
+            ////////////////////////////////////////////////////////////////////////
+
+        });
+    </script>
 }

@@ -94,5 +94,37 @@ namespace Health_Consulting_And_eChanneling.Controllers
             }
         return PartialView(model);
         }
+        
+        public JsonResult IncrementProduct(int productId)
+        {
+            List<CartViewModel> cart = Session["cart"] as List<CartViewModel>;
+            using (Db db = new Db())
+            {
+                CartViewModel model = cart.FirstOrDefault(x=>x.ProductId ==productId);
+
+                model.Quantity++;
+
+                var result = new {qty = model.Quantity, price = model.Price };
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }          
+        }
+        public ActionResult DecrementProduct(int productId)
+        {
+            List<CartViewModel> cart = Session["cart"] as List<CartViewModel>;
+            using (Db db = new Db())
+            {
+                CartViewModel model = cart.FirstOrDefault(x => x.ProductId == productId);
+                if (model.Quantity>1) {
+                    model.Quantity--;
+                }
+                else
+                {
+                    model.Quantity = 0;
+                    cart.Remove(model);
+                }
+                var result = new { qty = model.Quantity, price = model.Price };
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }

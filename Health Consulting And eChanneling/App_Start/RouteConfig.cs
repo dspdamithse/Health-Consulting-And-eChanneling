@@ -13,6 +13,7 @@ namespace Health_Consulting_And_eChanneling
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             
+            routes.MapRoute("Account", "Account/{action}/{id}",  new { controller = "Account", action = "Index", id = UrlParameter.Optional }, new [] { "Health_Consulting_And_eChanneling.Controllers" });
             routes.MapRoute("Cart", "Cart/{action}/{id}",  new { controller = "Cart", action = "Index", id = UrlParameter.Optional }, new [] { "Health_Consulting_And_eChanneling.Controllers" });
             routes.MapRoute("Shop", "Shop/{action}/{name}",  new { controller = "Shop", action = "Index", name = UrlParameter.Optional }, new [] { "Health_Consulting_And_eChanneling.Controllers" });
 

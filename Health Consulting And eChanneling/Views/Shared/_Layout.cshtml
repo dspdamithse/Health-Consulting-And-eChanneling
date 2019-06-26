@@ -16,15 +16,54 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="/" class="navbar-brand">eHealth</a>                
+                <a href="/" class="navbar-brand">eHealth</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @Html.Action("PagesMenuPartial", "Pages")
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li><a href="/account/logout">Logout</a></li>
+                    }
+                    else
+                    {
+                        if (ViewBag.Title == "Login")
+                        {
+                            <li class="active"><a href="/account/login">Login</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="/account/login">Login</a></li>
+                        }
+
+                    }
+                    @if (Request.IsAuthenticated && User.IsInRole("User"))
+                    {
+                        if (ViewBag.Title == "User Profile")
+                        {
+                            <li class="active">@Html.Action("UserNavPartial", "Account")</li>
+                        }
+                        else
+                        {
+                            <li>@Html.Action("UserNavPartial", "Account")</li>
+                        }
+                    }
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    @Html.Action("CartPartial", "Cart")
-                </ul>
+                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                {
+                    <ul class="nav navbar-nav navbar-right adminarea">
+                        <li>@Html.ActionLink("Dashboard", "Index", "Dashboard", new { area = "Administrator" }, null)</li>
+                    </ul>
+                }
+                else
+                {
+                    if (ViewBag.Title != "Cart Details")
+                    {
+                        <ul class="nav navbar-nav navbar-right">
+                            @Html.Action("CartPartial", "Cart")
+                        </ul>
+                    }
+                }
             </div>
         </div>
     </div>
@@ -39,7 +78,7 @@
                     @RenderBody()
                 </div>
                 <div class="col-xs-12 col-md-3">
-                   @Html.Action("SidebarPartial","Pages")
+                    @Html.Action("SidebarPartial", "Pages")
                 </div>
             }
             else
@@ -58,5 +97,8 @@
 
     @Scripts.Render("~/bundles/scripts")
     @RenderSection("scripts", required: false)
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
 </body>
 </html>
+

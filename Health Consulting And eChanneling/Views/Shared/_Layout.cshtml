@@ -16,7 +16,7 @@
                 <!-- Uncomment below if you prefer to use an image logo -->
                 <!-- <h1 class="text-light"><a href="#header"><span>NewBiz</span></a></h1> -->
                 <a href="#intro" class="scrollto">
-                    <img src="~/Content/images/logo.png" />
+                    <img src="~/Content/images/logox.png" />
                 </a>
             </div>
 
@@ -52,6 +52,8 @@
 
         </div>
     </header><!-- #header -->
+    @if (ViewBag.Title == "Home")
+    {
     <section id="intro" class="clearfix">
         <div class="container">
 
@@ -60,7 +62,7 @@
             </div>
 
             <div class="intro-info">
-                <h2>We provide<br><span>solutions</span><br>for your business!</h2>
+                <h2>Competative Services<br>Any Kind Of Health Problems</h2>
                 <div>
                     <a href="#about" class="btn-get-started scrollto">Get Started</a>
                     <a href="#services" class="btn-services scrollto">Our Services</a>
@@ -68,12 +70,17 @@
             </div>
 
         </div>
-    </section><!-- #intro -->
+    </section>
+    }
+    <!-- #intro -->
     <div class="container body-content">
         <div class="row">
-            <div class="col-xs-12 col-md-2">
-                @Html.Action("CategoryMenuPartial", "Shop")
-            </div>
+            @if (ViewBag.Title != "Login")
+            {
+                <div class="col-xs-12 col-md-2">
+                    @Html.Action("CategoryMenuPartial", "Shop")
+                </div>
+            }
             @if (ViewBag.HasSidebar == "Yes")
             {
                 <div class="col-xs-12 col-md-7">
@@ -149,7 +156,7 @@
             </div>
         </div>
 
-        <div class="container">
+        <div class="container" style="display:none">
             <div class="copyright">
                 &copy; Copyright <strong>NewBiz</strong>. All Rights Reserved
             </div>

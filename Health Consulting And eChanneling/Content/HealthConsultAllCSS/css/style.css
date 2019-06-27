@@ -14,10 +14,65 @@ body {
   color: #444;
   font-family: "Open Sans", sans-serif;
 }
+.login_box {
+    width: 350px;
+    padding: 30px;
+    position: absolute;
+    top: 12%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 30px;
+    background: #191919;
+    text-align: left;
+    margin-bottom: 600px;
+}
+.text-input_login{
+    border:0;
+    background:none;
+    display:block;
+    margin:20px auto;
+    text-align:left;
+    border:2px solid #3498db;
+    padding:14px 10px;
+    width:270px;
+    outline:none;
+    border-radius:25px;
+    transition:0.25s;
+}
+.text-input_login:focus{
+    border-color:#2ecc71;
+}
+.register_box {
+    width: 400px;
+    padding: 25px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 30px;
+    background: #191919;
+    text-align: left;
+    margin-top: 18%;
+}
+.text-input_register {
+    border: 0;
+    background: none;
+    display: block;
+    margin: 7px auto;
+    text-align: left;
+    border: 2px solid #3498db;
+    padding: 14px 10px;
+    width: 330px;
+    outline: none;
+    border-radius: 25px;
+    transition: 0.25s;
+}
+.form-color-change {
+    color: wheat;
+}
 
 a {
-  color: #007bff;
-  transition: 0.5s;
+    color: #007bff;
+    transition: 0.5s;
 }
 
 a:hover,
@@ -27,10 +82,13 @@ a:focus {
   outline: none;
   text-decoration: none;
 }
-
+.section_Indent_Apply
+{
+    margin-top:100px;
+}
 p {
-  padding: 0;
-  margin: 0 0 30px 0;
+    padding: 0;
+    margin: 0 0 30px 0;
 }
 
 h1,
@@ -1209,7 +1267,6 @@ h6 {
   color: #fff;
   font-weight: 400;
   letter-spacing: 3px;
-  text-transform: uppercase;
 }
 
 #footer .footer-top .footer-info p {

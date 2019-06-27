@@ -1,68 +1,73 @@
 ﻿@model Health_Consulting_And_eChanneling.Models.ViewModels.Account.UserViewModel
 
 @{
-    ViewBag.Title = "CreateAccount";
+    ViewBag.Title = "Register";
 }
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <hr />
+    <div class="register_box">
+        <h5 style="text-align:left; color: wheat; font-size:22px; font-weight:500">Register</h5>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            <label class="control-label col-md-2" for="FirstName">First Name : </label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+            <label class="control-label col-md-5 form-color-change" for="FirstName">First Name : </label>
+            <div class="col-md-7">
+                <input class="form-control text-box single-line text-input_register" data-val="true" data-val-required="The FirstName field is required." id="FirstName" name="FirstName" type="text" value="">
                 @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2" for="LastName">Last Name : </label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+            <label class="control-label col-md-5 form-color-change" for="LastName">Last Name : </label>
+            <div class="col-md-7">
+                <input class="form-control text-box single-line text-input_register" data-val="true" data-val-required="The LastName field is required." id="LastName" name="LastName" type="text" value="">
                 @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2" for="EmailAddress">Email : </label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control" } })
+            <label class="control-label col-md-5 form-color-change" for="EmailAddress">Email : </label>
+            <div class="col-md-7">
+                <input class="form-control text-box single-line text-input_register" data-val="true" data-val-required="The EmailAddress field is required." id="EmailAddress" name="EmailAddress" type="email" value="">
                 @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2" for="Username">Username : </label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+            <label class="control-label col-md-5 form-color-change" for="Username">Username : </label>
+            <div class="col-md-7">
+                <input class="form-control text-box single-line text-input_register" data-val="true" data-val-required="The Username field is required." id="Username" name="Username" type="text" value="">
                 @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2" for="Password">Password : </label>
-            <div class="col-md-10">
-                @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+            <label class="control-label col-md-5 form-color-change" for="Password">Password : </label>
+            <div class="col-md-7">
+                <input class="form-control text-input_register" data-val="true" data-val-required="The Password field is required." id="Password" name="Password" type="password">
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2" for="ConfirmPassword">Confirm Password : </label>
-            <div class="col-md-10">
-                @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
+            <label class="control-label col-md-7 form-color-change" for="ConfirmPassword">Confirm Password : </label>
+            <div class="col-md-6">
+                <input class="form-control text-input_register" data-val="true" data-val-required="The ConfirmPassword field is required." id="ConfirmPassword" name="ConfirmPassword" type="password">
                 @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="col-md-offset-2 col-md-10 form-color-change">
+                <input type="submit" value="Create" class="btn btn-info" />
+                &nbsp;&nbsp;&nbsp;<a href="/account/login">Login</a>
             </div>
         </div>
+
+    </div>
+    <div style="height:510px;">
+
     </div>
 }

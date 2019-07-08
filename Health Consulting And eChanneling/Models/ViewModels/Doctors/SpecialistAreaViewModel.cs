@@ -15,13 +15,13 @@ namespace Health_Consulting_And_eChanneling.Models.ViewModels.Doctors
         public SpecialistAreaViewModel(SpecialistAreaDTO row)
         {
             Id = row.Id;
-            SpecialistArea = row.SpecialistArea;
+            Name = row.Name;
             Slug = row.Slug;
             Sorting = row.Sorting;
         }
         public int Id { get; set; }
         [Display(Name="Specialist Category")]
-        public string SpecialistArea { get; set; }
+        public string Name { get; set; }
         public string Slug { get; set; }
         public int Sorting { get; set; }
     }

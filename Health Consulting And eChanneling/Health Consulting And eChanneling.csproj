@@ -508,6 +508,8 @@
     <Content Include="Areas\Administrator\Views\Shop\EditProduct.cshtml" />
     <Content Include="Areas\Administrator\Views\Doctors\SpecialistCategories.cshtml" />
     <Content Include="Areas\Administrator\Views\Doctors\AddNewDoctor.cshtml" />
+    <Content Include="Areas\Administrator\Views\Doctors\Doctors.cshtml" />
+    <Content Include="Areas\Administrator\Views\Doctors\EditDoctor.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor.php" />
     <Content Include="Scripts\ckeditor\ckeditor_basic.js" />

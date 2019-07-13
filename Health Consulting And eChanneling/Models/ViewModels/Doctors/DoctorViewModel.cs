@@ -28,16 +28,24 @@ namespace Health_Consulting_And_eChanneling.Models.ViewModels.Doctors
         }
         public int Id { get; set; }
         [Required]
+        [Display(Name = "First Name :")]
         public string FirstName { get; set; }
         [Required]
+        [Display(Name = "Last Name :")]
         public string LastName { get; set; }
         [Required]
         public string Username { get; set; }
         [Required]
+        [Display(Name = "Registration Number :")]
         public string RegNumber { get; set; }
+        [Required]
+        [Display(Name = "Contact Number :")]
         public string ContactNumber { get; set; }
+        [Display(Name = "Profile Image (Optianal) :")]
         public string Image { get; set; }
+        [Display(Name = "About Doctor (Optianal) :")]
         public string About { get; set; }
+        [Display(Name = "Specialist :")]
         public string SpecialistAreaName { get; set; }
         public int SpecialistAreaId { get; set; }
 

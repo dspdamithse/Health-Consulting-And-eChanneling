@@ -228,7 +228,7 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
                 ViewBag.Categories = new SelectList(db.Categories.ToList(), "Id", "Name");
                 ViewBag.SelectedCat = catId.ToString();
             }
-            var onePageOfProducts = listOfProductVM.ToPagedList(pageNumber, 3);
+            var onePageOfProducts = listOfProductVM.ToPagedList(pageNumber, 10);
 
             ViewBag.OnePageOfProducts = onePageOfProducts;
             return View(listOfProductVM);

@@ -12,93 +12,7 @@ using PagedList;
 namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
 {
     public class DoctorsController : Controller
-    {
-        public ActionResult SpecialistCategories()
-        {
-            List<SpecialistAreaViewModel> specialistAreaViewModelList;
-
-
-            using (Db db = new Db())
-            {
-                specialistAreaViewModelList = db.SpecialistArea
-                                .ToArray()
-                                .OrderBy(x => x.Sorting)
-                                .Select(x => new SpecialistAreaViewModel(x))
-                                .ToList();
-            }
-            return View(specialistAreaViewModelList);
-        }
-        [HttpPost]
-        public string AddNewSpecialistArea(string catName)
-        {
-            string id;
-            using (Db db = new Db())
-            {
-                if (db.SpecialistArea.Any(x => x.Name == catName))
-                    return "titletaken";
-
-                SpecialistAreaDTO dto = new SpecialistAreaDTO();
-
-                dto.Name = catName;
-                dto.Slug = catName.Replace(" ", "-").ToLower();
-                dto.Sorting = 100;
-
-                db.SpecialistArea.Add(dto);
-                db.SaveChanges();
-
-                id = dto.Id.ToString();
-            }
-
-            return id;
-        }
-        [HttpPost]
-        public void ReorderCategories(int[] id)
-        {
-            using (Db db = new Db())
-            {
-                int count = 1;
-                SpecialistAreaDTO dto;
-                foreach (var catId in id)
-                {
-                    dto = db.SpecialistArea.Find(catId);
-                    dto.Sorting = count;
-
-                    db.SaveChanges();
-                    count++;
-                }
-            }
-        }
-        public ActionResult DeleteSpecialistAreaCategory(int id)
-        {
-            using (Db db = new Db())
-            {
-                SpecialistAreaDTO dto = db.SpecialistArea.Find(id);
-
-                db.SpecialistArea.Remove(dto);
-
-                db.SaveChanges();
-            }
-            return RedirectToAction("SpecialistCategories");
-        }
-
-        [HttpPost]
-        public string RenameCategory(string newCatName, int id)
-        {
-            using (Db db = new Db())
-            {
-                if (db.SpecialistArea.Any(x => x.Name == newCatName))
-                    return "titletaken";
-
-                SpecialistAreaDTO dto = db.SpecialistArea.Find(id);
-
-                dto.Name = newCatName;
-                dto.Slug = newCatName.Replace(" ", "-").ToLower();
-
-                db.SaveChanges();
-            }
-            return "Ok";
-        }
-
+    {       
         [HttpGet]
         [ActionName("new-doctor-registration")]
         public ActionResult AddNewDoctor()
@@ -107,7 +21,7 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
 
             using (Db db = new Db())
             {
-                model.SpecialistArea = new SelectList(db.SpecialistArea.ToList(), "Id", "Name");
+                model.SpecialistArea = new SelectList(db.DoctorSpecialist.ToList(), "Id", "Name");
             }
             return View("AddNewDoctor", model);
         }
@@ -118,7 +32,7 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
             {
                 using (Db db = new Db())
                 {
-                    model.SpecialistArea = new SelectList(db.SpecialistArea.ToList(), "Id", "Name");
+                    model.SpecialistArea = new SelectList(db.DoctorSpecialist.ToList(), "Id", "Name");
                     return View(model);
                 }
             }
@@ -127,7 +41,7 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
             {
                 if (db.Doctors.Any(x => x.Username == model.Username))
                 {
-                    model.SpecialistArea = new SelectList(db.SpecialistArea.ToList(), "Id", "Name");
+                    model.SpecialistArea = new SelectList(db.DoctorSpecialist.ToList(), "Id", "Name");
                     ModelState.AddModelError("", "Username Alredy exist");
                     return View(model);
                 }
@@ -148,7 +62,7 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
                 doctor.SpecialistAreaId = model.SpecialistAreaId;
                 doctor.SpecialistAreaName = model.SpecialistAreaName;
 
-                SpecialistAreaDTO specDTO = db.SpecialistArea.FirstOrDefault(x => x.Id == model.SpecialistAreaId);
+                DoctorSpecialistDTO specDTO = db.DoctorSpecialist.FirstOrDefault(x => x.Id == model.SpecialistAreaId);
                 doctor.SpecialistAreaName = specDTO.Name;
 
                 db.Doctors.Add(doctor);
@@ -182,7 +96,7 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
                 {
                     using (Db db = new Db())
                     {
-                        model.SpecialistArea = new SelectList(db.SpecialistArea.ToList(), "Id", "Name");
+                        model.SpecialistArea = new SelectList(db.DoctorSpecialist.ToList(), "Id", "Name");
                         ModelState.AddModelError("", "Image was Not Uploaded- Image format is wrong");
                         return View(model);
                     }
@@ -223,7 +137,7 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
                                     .Where(x => catId == null || catId == 0 || x.SpecialistAreaId == catId)
                                     .Select(x => new DoctorViewModel(x))
                                     .ToList();
-                ViewBag.SpecialistArea = new SelectList(db.SpecialistArea.ToList(), "Id", "Name");
+                ViewBag.SpecialistArea = new SelectList(db.DoctorSpecialist.ToList(), "Id", "Name");
                 ViewBag.SelectedCat = catId.ToString();
             }
             var onePageOfProducts = listOfDoctorVM.ToPagedList(pageNumber, 10);
@@ -246,7 +160,7 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
                 }
                 model = new DoctorViewModel(dto);
 
-                model.SpecialistArea = new SelectList(db.SpecialistArea.ToList(), "Id", "Name");
+                model.SpecialistArea = new SelectList(db.DoctorSpecialist.ToList(), "Id", "Name");
             }
             return View(model);
         }
@@ -256,7 +170,7 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
             int id = model.Id;
             using (Db db = new Db())
             {
-                model.SpecialistArea = new SelectList(db.SpecialistArea.ToList(), "Id", "Name");
+                model.SpecialistArea = new SelectList(db.DoctorSpecialist.ToList(), "Id", "Name");
             }           
 
             if (!ModelState.IsValid)
@@ -275,7 +189,7 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
 
             using (Db db = new Db())
             {
-                DoctorDTO doctor = new DoctorDTO();
+                DoctorDTO doctor = db.Doctors.Find(id);
                 doctor.FirstName = model.FirstName;
                 doctor.LastName = model.LastName;
                 doctor.Username = model.Username;
@@ -285,7 +199,7 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
                 doctor.About = model.About;
                 doctor.SpecialistAreaId = model.SpecialistAreaId;
 
-                SpecialistAreaDTO spAreaDTO = db.SpecialistArea.FirstOrDefault(x => x.Id == model.SpecialistAreaId);
+                DoctorSpecialistDTO spAreaDTO = db.DoctorSpecialist.FirstOrDefault(x => x.Id == model.SpecialistAreaId);
                 doctor.SpecialistAreaName = spAreaDTO.Name;
 
                 db.SaveChanges();

@@ -7,9 +7,9 @@
 
 <h2 class="sub_page_title">Doctor Specialist Category List</h2>
 
-<div class="new-cat">
-    <div class="form-group" style="max-width: 300px;">
-        <input class="form-control" type="text" id="newcatname" />
+<div class="e-clinic-new-specialist-area-adding">
+    <div class="form-group" style="max-width: 320px;">
+        <input class="form-control" type="text" id="newspecialistname" />
     </div>
     <div style="padding-bottom:10px;">
         <a class="btn btn-info btn-sm" href="#" id="newcata">Add New Category</a>
@@ -53,7 +53,7 @@ else
     <script>
         $(function () {
             var newCatA = $("a#newcata");
-            var newCatTextInput = $("#newcatname");
+            var newCatTextInput = $("#newspecialistname");
             var ajaxText = $("span.ajax-text");
             var table = $("table#pages tbody");
 
@@ -70,11 +70,11 @@ else
                     return false;
                 }
                 ajaxText.show();
-                var url = "/administrator/DoctorSpecialist/AddNewCategory";
+                var url = "/administrator/DoctorSpecialist/AddNewDoctorSpecialistCategory";
                 $.post(url, { catName: catName }, function (data) {
                     var response = data.trim();
                     if (response == "titletaken") {
-                        ajaxText.html("<span class='alert alert-danger'>Title alredy taken</span>");
+                        ajaxText.html("<span class='alert alert-danger'>Specialist Name has already taken</span>");
                         setTimeout(function () {
                             ajaxText.fadeOut("fast", function () {
                                 ajaxText.html("<img src='/Content/images/ajax-loader.gif' />");
@@ -86,7 +86,7 @@ else
                         if (!$("table#pages").length) {
                             location.reload();
                         } else {
-                            ajaxText.html("<span class='alert alert-success'>Category successfully added</span>");
+                            ajaxText.html("<span class='alert alert-success'>Updated successfully</span>");
                             setTimeout(function () {
                                 ajaxText.fadeOut("fast", function () {
                                     ajaxText.html("<img src='/Content/images/ajax-loader.gif' />");

@@ -28,7 +28,7 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
         }
 
         [HttpPost]
-        public string AddNewCategory(string catName)
+        public string AddNewDoctorSpecialistCategory(string catName)
         {
             string id;
             using (Db db = new Db())
@@ -47,7 +47,6 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
 
                 id = dto.Id.ToString();
             }
-
             return id;
         }
 

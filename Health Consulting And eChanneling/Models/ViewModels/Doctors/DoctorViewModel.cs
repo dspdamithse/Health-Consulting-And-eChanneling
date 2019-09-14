@@ -50,5 +50,6 @@ namespace Health_Consulting_And_eChanneling.Models.ViewModels.Doctors
         public int SpecialistAreaId { get; set; }
 
         public IEnumerable<SelectListItem> SpecialistArea { get; set; }
+        public SelectList DoctorSpecialist { get; internal set; }
     }
 }

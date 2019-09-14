@@ -1,0 +1,91 @@
+﻿@model Health_Consulting_And_eChanneling.Models.ViewModels.Doctors.DoctorViewModel
+
+@{
+    ViewBag.Title = "DoctorDetails";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DoctorDetails</h2>
+
+<div>
+    <h4>DoctorViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SLMC_Reg_No)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SLMC_Reg_No)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.About)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.About)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SpecialistAreaName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SpecialistAreaName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SpecialistAreaId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SpecialistAreaId)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

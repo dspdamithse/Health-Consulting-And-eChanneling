@@ -100,6 +100,7 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
         }
 
         [HttpGet]
+        [ActionName("new-doctor-registration")]
         public ActionResult AddNewDoctor()
         {
             DoctorViewModel model = new DoctorViewModel();
@@ -108,7 +109,7 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
             {
                 model.SpecialistArea = new SelectList(db.SpecialistArea.ToList(), "Id", "Name");
             }
-            return View(model);
+            return View("AddNewDoctor", model);
         }
         [HttpPost]
         public ActionResult AddNewDoctor(DoctorViewModel model, HttpPostedFileBase file)
@@ -140,7 +141,7 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
                 doctor.FirstName = model.FirstName;
                 doctor.LastName = model.LastName;
                 doctor.Username = model.Username;
-                doctor.RegNumber = model.RegNumber;
+                doctor.SLMC_Reg_No = model.SLMC_Reg_No;
                 doctor.ContactNumber = model.ContactNumber;
                 doctor.Image = model.Image;
                 doctor.About = model.About;
@@ -205,9 +206,10 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
                 img.Save(path2);
             }
 
-            return RedirectToAction("AddNewDoctor");
+            return RedirectToAction("view-all-registed-doctors-list");
         }
 
+        [ActionName("view-all-registed-doctors-list")]
         public ActionResult Doctors(int? page, int? catId)
         {
             List<DoctorViewModel> listOfDoctorVM;
@@ -227,7 +229,7 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
             var onePageOfProducts = listOfDoctorVM.ToPagedList(pageNumber, 10);
 
             ViewBag.OnePageOfProducts = onePageOfProducts;
-            return View(listOfDoctorVM);
+            return View("Doctors", listOfDoctorVM);
 
         }
 
@@ -244,7 +246,7 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
                 }
                 model = new DoctorViewModel(dto);
 
-                model.SpecialistArea = new SelectList(db.Categories.ToList(), "Id", "Name");
+                model.SpecialistArea = new SelectList(db.SpecialistArea.ToList(), "Id", "Name");
             }
             return View(model);
         }
@@ -277,7 +279,7 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
                 doctor.FirstName = model.FirstName;
                 doctor.LastName = model.LastName;
                 doctor.Username = model.Username;
-                doctor.RegNumber = model.RegNumber;
+                doctor.SLMC_Reg_No = model.SLMC_Reg_No;
                 doctor.ContactNumber = model.ContactNumber;
                 doctor.Image = model.Image;
                 doctor.About = model.About;
@@ -331,8 +333,29 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
                 img.Resize(200, 200);
                 img.Save(path2);
             }
-            return RedirectToAction("Doctors");
+            return RedirectToAction("view-all-registed-doctors-list");
         }
+
+        [ActionName("view-doctors-view-details")]
+        public ActionResult DoctorDetails(int id)
+        {
+            DoctorViewModel model;
+
+            using (Db db = new Db())
+            {
+                DoctorDTO dto = db.Doctors.Find(id);
+
+                if (dto == null)
+                {
+                    return Content("Page is not Exist");
+                }
+
+                model = new DoctorViewModel(dto);
+
+            }
+            return View("DoctorDetails", model);
+        }
+
         public ActionResult DeleteDoctor(int id)
         {
             //delete from database
@@ -349,7 +372,7 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
             if (Directory.Exists(pathString))
                 Directory.Delete(pathString, true);
 
-            return RedirectToAction("Doctors");
+            return RedirectToAction("view-all-registed-doctors-list");
         }
 
     }

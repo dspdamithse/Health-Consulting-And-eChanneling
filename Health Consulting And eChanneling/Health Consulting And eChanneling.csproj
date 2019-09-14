@@ -135,6 +135,7 @@
     <Compile Include="Areas\Administrator\AdministratorAreaRegistration.cs" />
     <Compile Include="Areas\Administrator\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Administrator\Controllers\DoctorsController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\DoctorSpecialistController.cs" />
     <Compile Include="Areas\Administrator\Controllers\PagesController.cs" />
     <Compile Include="Areas\Administrator\Controllers\ShopController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="Models\Data\CategoryDTO.cs" />
     <Compile Include="Models\Data\Db.cs" />
     <Compile Include="Models\Data\DoctorDTO.cs" />
+    <Compile Include="Models\Data\DoctorSpecialistDTO.cs" />
     <Compile Include="Models\Data\OrderDetailsDTO.cs" />
     <Compile Include="Models\Data\OrderDTO.cs" />
     <Compile Include="Models\Data\PageDTO.cs" />
@@ -161,6 +163,7 @@
     <Compile Include="Models\ViewModels\Account\UserProfileViewModel.cs" />
     <Compile Include="Models\ViewModels\Account\UserViewModel.cs" />
     <Compile Include="Models\ViewModels\Cart\CartViewModel.cs" />
+    <Compile Include="Models\ViewModels\Doctors\DoctorSpecialistViewModel.cs" />
     <Compile Include="Models\ViewModels\Doctors\DoctorViewModel.cs" />
     <Compile Include="Models\ViewModels\Doctors\SpecialistAreaViewModel.cs" />
     <Compile Include="Models\ViewModels\Pages\PageViewModel.cs" />
@@ -510,6 +513,9 @@
     <Content Include="Areas\Administrator\Views\Doctors\AddNewDoctor.cshtml" />
     <Content Include="Areas\Administrator\Views\Doctors\Doctors.cshtml" />
     <Content Include="Areas\Administrator\Views\Doctors\EditDoctor.cshtml" />
+    <Content Include="Areas\Administrator\Views\Doctors\DoctorDetails.cshtml" />
+    <Content Include="Areas\Administrator\Views\DoctorSpecialist\SpecialistCategory.cshtml" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor.php" />
     <Content Include="Scripts\ckeditor\ckeditor_basic.js" />

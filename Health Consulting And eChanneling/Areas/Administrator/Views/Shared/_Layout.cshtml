@@ -7,7 +7,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
+<body class="body">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -16,49 +16,24 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="/Administrator/dashboard" class="navbar-brand">Admin Dashboard</a>
+                <a href="/Administrator/dashboard" class="navbar-brand">Dashboard</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="/Administrator/Pages">Pages</a></li>
-                    <li><a href="/Administrator/Pages/editsidebar">Edit Sidebar</a></li>
-                    <li><a href="/Administrator/Shop/Categories">Categories</a></li>
+                    <li><a href="~/Administrator/Doctors/view-all-registed-doctors-list">Doctors</a></li>
+                    <li><a href="~/Administrator/DoctorSpecialist/all-doctor-specialist-categories">Specialist Cat.</a></li>
                     <li><a href="/Administrator/Shop/Products">Products</a></li>
                 </ul>
                 <ul class="navbar-right">
-                    <li><a href="/" class="navbar-brand" target="_blank">ShoppingCart</a></li>
+                    <li><a href="/" class="navbar-brand" target="_blank">(Adimin Name)</a></li>
                 </ul>
             </div>
         </div>
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-3">
-                <ul class="left_sidebar">
-                    <li>X navbar-brand Section</li>
-                    <li>X</li>
-                    <li>X</li>
-                    <li>X</li>
-                    <li>X</li>
-                    <li>X</li>
-                    <li>X</li>
-                    <li>X navbar-brand Section</li>
-                    <li>X</li>
-                    <li>X</li>
-                    <li>X</li>
-                    <li>X</li>
-                    <li>X</li>
-                    <li>X</li>
-                    <li>X navbar-brand Section</li>
-                    <li>X</li>
-                    <li>X</li>
-                    <li>X</li>
-                    <li>X</li>
-                    <li>X</li>
-                    <li>X</li>
-                </ul>
-            </div>
-            <div class="col-md-9">
+            <div class="col-md-12">
                 @RenderBody()
                 <hr />             
             </div>

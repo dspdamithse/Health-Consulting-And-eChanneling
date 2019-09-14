@@ -2,6 +2,9 @@
     padding-top: 50px;
     padding-bottom: 20px;
 }
+.body {
+    background-color: #d8d69d !important;
+}
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
@@ -103,4 +106,9 @@ input, button, select, textarea {
 .navbar-inverse .navbar-brand {
     color: #8de220;
     font-size: 1.5em;
+}
+.e-medi-label {
+    text-align: start !important;
+    color: #000000;
+    font-size: 14px;
 }

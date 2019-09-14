@@ -1,0 +1,175 @@
+﻿@model IEnumerable<Health_Consulting_And_eChanneling.Models.ViewModels.Doctors.DoctorSpecialistViewModel>
+
+@{
+    ViewBag.Title = "SpecialistCategory";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="sub_page_title">Doctor Specialist Category List</h2>
+
+<div class="new-cat">
+    <div class="form-group" style="max-width: 300px;">
+        <input class="form-control" type="text" id="newcatname" />
+    </div>
+    <div style="padding-bottom:10px;">
+        <a class="btn btn-info btn-sm" href="#" id="newcata">Add New Category</a>
+    </div>
+    <span class="ajax-text">
+        <img src="~/Content/images/ajax-loader.gif" />
+    </span>
+</div>
+@if (!Model.Any())
+{
+    <h3 class="text-center">There are no Categories to show</h3>
+}
+else
+{
+    <table class="table sorting" id="pages">
+        <tr class="home">
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr id="id_@item.Id">
+                <td>
+                    <div class="ajaxdivtd"></div>
+                    @Html.EditorFor(odelItem => item.Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "DeleteCategory", new { id = item.Id }, new { @class = "delete btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </table>
+}
+@section scripts
+    {
+
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <script>
+        $(function () {
+            var newCatA = $("a#newcata");
+            var newCatTextInput = $("#newcatname");
+            var ajaxText = $("span.ajax-text");
+            var table = $("table#pages tbody");
+
+            newCatTextInput.keyup(function (e) {
+                if (e.keyCode == 13) {
+                    newCatA.click();
+                }
+            });
+            newCatA.click(function (e) {
+                e.preventDefault();
+                var catName = newCatTextInput.val();
+                if (catName.length < 2) {
+                    alert("At least two charactors need for continue as Category");
+                    return false;
+                }
+                ajaxText.show();
+                var url = "/administrator/DoctorSpecialist/AddNewCategory";
+                $.post(url, { catName: catName }, function (data) {
+                    var response = data.trim();
+                    if (response == "titletaken") {
+                        ajaxText.html("<span class='alert alert-danger'>Title alredy taken</span>");
+                        setTimeout(function () {
+                            ajaxText.fadeOut("fast", function () {
+                                ajaxText.html("<img src='/Content/images/ajax-loader.gif' />");
+                            });
+                        }, 2000);
+                        return false;
+                    }
+                    else {
+                        if (!$("table#pages").length) {
+                            location.reload();
+                        } else {
+                            ajaxText.html("<span class='alert alert-success'>Category successfully added</span>");
+                            setTimeout(function () {
+                                ajaxText.fadeOut("fast", function () {
+                                    ajaxText.html("<img src='/Content/images/ajax-loader.gif' />");
+                                });
+                            }, 2000);
+                            newCatTextInput.val("");
+
+                            var toAppend = $("table#pages tbody tr:last").clone();
+                            toAppend.attr("id", "id_" + data);
+                            toAppend.find("#item_Name").val(catName);
+                            toAppend.find("a.delete").attr("href", "/administrator/DoctorSpecialist/DeleteCategory/" + data);
+                            table.append(toAppend);
+                            table.sortable("refresh");
+                        }
+                    }
+                });
+             });
+            ////////////////////////////////////////////////////////////////////////
+            $("table#pages tbody").sortable({
+                items: "tr:not(.home)",
+                placeholder: "ui-state-highlight",
+                update: function () {
+                    var ids = $("table#pages tbody").sortable("serialize");
+                    var url = "/administrator/DoctorSpecialist/ReorderCategories";
+
+                    $.post(url, ids, function (data) {
+                    });
+                }
+
+            });
+            ////////////////////////////////////////////////////////////////////////
+            $("body").on("click", "a.delete", function () {
+
+                if (!confirm("Are you sure you need to delete this"))
+                    return false;
+            });
+            ////////////////////////////////////////////////////////////////////////
+            /*
+             * Rename Category
+             * */
+            var originalTextBoxValue;
+            $("table#pages input.text-box").dblclick(function () {
+                originalTextBoxValue = $(this).val();
+                $(this).attr("readonly", false);
+            });
+
+            $("table#pages input.text-box").keyup(function (e) {
+                if (e.keyCode == 13) {
+                    $(this).blur();
+                }
+            });
+
+            $("table#pages input.text-box").blur(function () {
+                var $this = $(this);
+                var ajaxdiv = $this.parent().find(".ajaxdivtd");
+                var newCatName = $this.val();
+                var id = $this.parent().parent().attr("id").substring(3);
+                var url = "/administrator/DoctorSpecialist/RenameCategory";
+
+                if (newCatName.length < 2)
+                {
+                    alert("Category name must be at least two charactors");
+                    $this.attr("readonly", true);
+                    return false;
+                }
+                $.post(url, { newCatName: newCatName, id: id }, function (data) {
+                    var response = data.trim();
+                    if (response == "titletaken") {
+                        ajaxdiv.html("<span class='alert alert-danger'>Title alredy taken</span>").show();
+                    } else {
+                        ajaxdiv.html("<span class='alert alert-success'>Successfully updated</span>").show();
+                    }
+                    setTimeout(function () {
+                        ajaxdiv.fadeOut("fast", function () {
+                            ajaxdiv.html("");
+                        });
+                    }, 2000);
+                }).done(function () {
+                    $this.attr("readonly", true);
+                });
+            });
+            ////////////////////////////////////////////////////////////////////////
+
+        });
+    </script>
+}

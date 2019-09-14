@@ -19,7 +19,7 @@ namespace Health_Consulting_And_eChanneling.Models.ViewModels.Doctors
             FirstName = row.FirstName;
             LastName = row.LastName;
             Username = row.Username;
-            RegNumber = row.RegNumber;
+            SLMC_Reg_No = row.SLMC_Reg_No;
             ContactNumber = row.ContactNumber;
             Image = row.Image;
             About = row.About;
@@ -36,8 +36,8 @@ namespace Health_Consulting_And_eChanneling.Models.ViewModels.Doctors
         [Required]
         public string Username { get; set; }
         [Required]
-        [Display(Name = "Registration Number :")]
-        public string RegNumber { get; set; }
+        [Display(Name = "SLMC Reg. No. :")]
+        public string SLMC_Reg_No { get; set; }
         [Required]
         [Display(Name = "Contact Number :")]
         public string ContactNumber { get; set; }

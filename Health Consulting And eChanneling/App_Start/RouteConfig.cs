@@ -12,15 +12,16 @@ namespace Health_Consulting_And_eChanneling
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-            
-            routes.MapRoute("Account", "Account/{action}/{id}",  new { controller = "Account", action = "Index", id = UrlParameter.Optional }, new [] { "Health_Consulting_And_eChanneling.Controllers" });
-            routes.MapRoute("Cart", "Cart/{action}/{id}",  new { controller = "Cart", action = "Index", id = UrlParameter.Optional }, new [] { "Health_Consulting_And_eChanneling.Controllers" });
-            routes.MapRoute("Shop", "Shop/{action}/{name}",  new { controller = "Shop", action = "Index", name = UrlParameter.Optional }, new [] { "Health_Consulting_And_eChanneling.Controllers" });
 
-            routes.MapRoute("SidebarPartial", "Pages/SidebarPartial",  new { controller = "Pages", action = "SidebarPartial" }, new [] { "Health_Consulting_And_eChanneling.Controllers" });
-            routes.MapRoute("PagesMenuPartial", "Pages/PagesMenuPartial",  new { controller = "Pages", action = "PagesMenuPartial" }, new [] { "Health_Consulting_And_eChanneling.Controllers" });
-            routes.MapRoute("Pages","{page}",  new { controller = "Pages", action = "Index" }, new [] { "Health_Consulting_And_eChanneling.Controllers" });
-            routes.MapRoute("Default","",  new { controller = "Pages", action = "Index" }, new [] { "Health_Consulting_And_eChanneling.Controllers" });
+            routes.MapMvcAttributeRoutes();
+            routes.MapRoute("Account", "Account/{action}/{id}", new { controller = "Account", action = "Index", id = UrlParameter.Optional }, new[] { "Health_Consulting_And_eChanneling.Controllers" });
+            routes.MapRoute("Cart", "Cart/{action}/{id}", new { controller = "Cart", action = "Index", id = UrlParameter.Optional }, new[] { "Health_Consulting_And_eChanneling.Controllers" });
+            routes.MapRoute("Shop", "Shop/{action}/{name}", new { controller = "Shop", action = "Index", name = UrlParameter.Optional }, new[] { "Health_Consulting_And_eChanneling.Controllers" });
+
+            routes.MapRoute("SidebarPartial", "Pages/SidebarPartial", new { controller = "Pages", action = "SidebarPartial" }, new[] { "Health_Consulting_And_eChanneling.Controllers" });
+            routes.MapRoute("PagesMenuPartial", "Pages/PagesMenuPartial", new { controller = "Pages", action = "PagesMenuPartial" }, new[] { "Health_Consulting_And_eChanneling.Controllers" });
+            routes.MapRoute("Pages", "{page}", new { controller = "Pages", action = "Index" }, new[] { "Health_Consulting_And_eChanneling.Controllers" });
+            routes.MapRoute("Default", "{controller}/{action}/{id}", new { controller = "Pages", action = "Index", id = UrlParameter.Optional }, new[] { "Health_Consulting_And_eChanneling.Controllers" });
             /*routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

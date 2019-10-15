@@ -21,8 +21,13 @@ namespace Health_Consulting_And_eChanneling.Models.Data
         public string About { get; set; }
         public string SpecialistAreaName { get; set; }
         public int SpecialistAreaId { get; set; }
+        public string Password { get; set; }
+        public int UserId { get; set; }
 
         [ForeignKey("SpecialistAreaId")]
         public virtual SpecialistAreaDTO SpecialistArea { get; set; }
+
+        [ForeignKey("UserId")]
+        public virtual UserDTO User { get; set; }
     }
 }

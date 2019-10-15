@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Health_Consulting_And_eChanneling.Models.ViewModels.News.NewsViewModel>
+
+@{
+    ViewBag.Title = "NewsList";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+@if (TempData["SuccessMsg"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMsg"]
+    </div>
+}
+
+
+@if (!Model.Any())
+{
+    <h3 class="text-center">No Contents Available</h3>
+}
+else
+{
+    <p>
+        @Html.ActionLink("Add New", "AddNewNewsArticle")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                Title
+            </th>
+            <th>
+                Slug
+            </th>
+            <th>
+                Thumb Image
+            </th>
+            <th>
+                Content
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr style="box-shadow:2px 5px 9px;">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Slug)
+                </td>
+                <td>
+                    <img style="border-radius: 50%;" src="~/Content/News/Images/@item.Id/Thumbs/@item.Image" alt="@item.Image" />
+                </td>
+                <td>
+                    <a class="btn btn-info btn-ex" href="/Administrator/News/DetailsNews/1">Content</a>
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditNews", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>           
+        }
+    </table>
+
+}

@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Health_Consulting_And_eChanneling.Models.ViewModels.News.NewsViewModel>
+
+@{
+    ViewBag.Title = "NewsList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>NewsList</h2>
+
+<table class="table">
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <a href="~/important-news/@item.Slug"><img src="~/Content/News/Images/@item.Id/Thumbs/@item.Image" alt="@item.Image" /></a>
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Content)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </td>
+    </tr>
+}
+
+</table>

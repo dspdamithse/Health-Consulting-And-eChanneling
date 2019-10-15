@@ -2,8 +2,10 @@
 using Health_Consulting_And_eChanneling.Models.ViewModels.Account;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Security;
 
@@ -67,7 +69,7 @@ namespace Health_Consulting_And_eChanneling.Controllers
 
         [ActionName("create-account")]
         [HttpPost]
-        public ActionResult CreateAccount(UserViewModel model)
+        public ActionResult CreateAccount(UserViewModel model, HttpPostedFileBase file)
         {
             if (!ModelState.IsValid)
             {
@@ -78,6 +80,7 @@ namespace Health_Consulting_And_eChanneling.Controllers
                 ModelState.AddModelError("","Password and Confirm password are not match");
                 return View("CreateAccount", model);
             }
+            int userid;
             using (Db db = new Db())
             {
                 if (db.Users.Any(x=>x.Username.Equals(model.Username)))
@@ -106,6 +109,7 @@ namespace Health_Consulting_And_eChanneling.Controllers
                 db.SaveChanges();
 
                 int id = userDTO.Id;
+                userid = userDTO.Id;
                 UserRoleDTO userRoleDto = new UserRoleDTO()
                 {
                     UserId = id,
@@ -116,6 +120,48 @@ namespace Health_Consulting_And_eChanneling.Controllers
 
             }
             TempData["SM"] = "Successfully Registered";
+            var originalDirectory = new DirectoryInfo(string.Format("{0}Content\\Registration", Server.MapPath(@"\")));
+
+            string pathString1 = Path.Combine(originalDirectory.ToString(), "Users");
+            string pathString2 = Path.Combine(originalDirectory.ToString(), "Users\\" + userid.ToString());
+            string pathString3 = Path.Combine(originalDirectory.ToString(), "Users\\" + userid.ToString() + "\\Thumbs");
+
+            if (!Directory.Exists(pathString1))
+                Directory.CreateDirectory(pathString1);
+            if (!Directory.Exists(pathString2))
+                Directory.CreateDirectory(pathString2);
+            if (!Directory.Exists(pathString3))
+                Directory.CreateDirectory(pathString3);
+
+            if (file != null && file.ContentLength > 0)
+            {
+                string ext = file.ContentType.ToLower();
+                if (ext != "image/jpg" && ext != "image/jpeg" && ext != "image/pjpeg" && ext != "image/gif" && ext != "image/x-png" && ext != "image/png")
+                {
+                    using (Db db = new Db())
+                    {
+                        ModelState.AddModelError("", "Image was Not Uploaded- Image format is wrong");
+                        return View("CreateAccont", model);
+                    }
+                }
+
+                string imageName = file.FileName;
+                using (Db db = new Db())
+                {
+                    UserDTO dto = db.Users.Find(userid);
+                    dto.ProfileImage = imageName;
+
+                    db.SaveChanges();
+                }
+                var path = string.Format("{0}\\{1}", pathString2, imageName);
+                var path2 = string.Format("{0}\\{1}", pathString3, imageName);
+
+                file.SaveAs(path);
+
+                WebImage img = new WebImage(file.InputStream);
+                img.Resize(200, 200);
+                img.Save(path2);
+            }
 
             return Redirect("~/account/Login");
         }

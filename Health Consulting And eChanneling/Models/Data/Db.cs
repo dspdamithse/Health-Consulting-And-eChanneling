@@ -20,5 +20,6 @@ namespace Health_Consulting_And_eChanneling.Models.Data
         public DbSet<UserRoleDTO> UserRoles { get; set; }
         public DbSet<OrderDTO> Orders { get; set; }
         public DbSet<OrderDetailsDTO> OrderDetails { get; set; }
+        public DbSet<NewsDTO> News { get; set; }
     }
 }

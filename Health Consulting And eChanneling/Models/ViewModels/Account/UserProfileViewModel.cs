@@ -18,6 +18,7 @@ namespace Health_Consulting_And_eChanneling.Models.ViewModels.Account
             FirstName = row.FirstName;
             LastName = row.LastName;
             EmailAddress = row.EmailAddress;
+            ProfileImage = row.ProfileImage;
             Password = row.Password;
         }
         public int Id { get; set; }
@@ -28,6 +29,7 @@ namespace Health_Consulting_And_eChanneling.Models.ViewModels.Account
         [Required]
         [DataType(DataType.EmailAddress)]
         public string EmailAddress { get; set; }
+        public String ProfileImage { get; set; }
         [Required]
         public string Username { get; set; }
         public string Password { get; set; }

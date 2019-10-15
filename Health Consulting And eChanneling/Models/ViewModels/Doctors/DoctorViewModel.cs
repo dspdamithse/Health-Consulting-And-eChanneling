@@ -25,6 +25,8 @@ namespace Health_Consulting_And_eChanneling.Models.ViewModels.Doctors
             About = row.About;
             SpecialistAreaName = row.SpecialistAreaName;
             SpecialistAreaId = row.SpecialistAreaId;
+            Password = row.Password;
+            UserId = row.UserId;
         }
         public int Id { get; set; }
         [Required]
@@ -48,6 +50,8 @@ namespace Health_Consulting_And_eChanneling.Models.ViewModels.Doctors
         [Display(Name = "Specialist :")]
         public string SpecialistAreaName { get; set; }
         public int SpecialistAreaId { get; set; }
+        public string Password { get; set; }
+        public int UserId { get; set; }
 
         public IEnumerable<SelectListItem> SpecialistArea { get; set; }
         public SelectList DoctorSpecialist { get; internal set; }

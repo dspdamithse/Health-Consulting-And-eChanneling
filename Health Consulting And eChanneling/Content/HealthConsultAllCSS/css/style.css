@@ -52,7 +52,7 @@ body {
     border-radius: 30px;
     background: #191919;
     text-align: left;
-    margin-top: 18%;
+    margin-top: 369px;
 }
 .text-input_register {
     border: 0;
@@ -1244,10 +1244,11 @@ h6 {
 --------------------------------------------------------------*/
 
 #footer {
-  background: #00428a;
-  padding: 0 0 30px 0;
-  color: #eee;
-  font-size: 14px;
+    background: #00428a;
+    padding: 0 0 30px 0;
+    color: #eee;
+    font-size: 14px;
+    margin-top: 157px;
 }
 
 #footer .footer-top {

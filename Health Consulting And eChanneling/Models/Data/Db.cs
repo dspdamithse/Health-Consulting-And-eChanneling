@@ -21,5 +21,7 @@ namespace Health_Consulting_And_eChanneling.Models.Data
         public DbSet<OrderDTO> Orders { get; set; }
         public DbSet<OrderDetailsDTO> OrderDetails { get; set; }
         public DbSet<NewsDTO> News { get; set; }
+        public DbSet<MediServiceDTO> MediService { get; set; }
+
     }
 }

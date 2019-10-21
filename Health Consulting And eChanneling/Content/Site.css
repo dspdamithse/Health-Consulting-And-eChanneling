@@ -112,3 +112,14 @@ input, button, select, textarea {
     color: #000000;
     font-size: 14px;
 }
+tr> .MediService:hover{
+    background-color:aqua;
+}
+.serviceImg:hover{
+    height:150%;
+}
+.DoctorImageCheck {
+    box-shadow: 1px 4px 17px;
+    color: #328e21;
+    border-radius: 27px;
+}

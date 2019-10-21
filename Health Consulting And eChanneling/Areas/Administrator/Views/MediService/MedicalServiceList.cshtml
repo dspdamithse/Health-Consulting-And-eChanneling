@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Health_Consulting_And_eChanneling.Models.ViewModels.MediService.MediServiceViewModel>
+
+@{
+    ViewBag.Title = "MedicalServiceList";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Medical Service </h2>
+@if (TempData["SuccessMsg"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMsg"]
+    </div>
+}
+
+
+@if (!Model.Any())
+{
+    <h3 class="text-center">No Services Available</h3>
+}
+else
+{
+    <p>
+        @Html.ActionLink("New Service", "CreateNewService")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                Thumb Image
+            </th>
+            <th>
+                Title
+            </th>
+            <th>
+                Description About Service
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="~/Content/MediService/Images/@item.Id/Thumbs/@item.Image" alt="@item.Image" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.Raw(item.Content)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditMediService", new { id = item.Id }, new { @class = "btn btn-info btn-xs" }) |
+                    @Html.ActionLink("Details", "MediServiceDetails", new { id = item.Id }, new { @class = "btn btn-success btn-xs" }) |
+                    @Html.ActionLink("Delete", "DeleteMediService", new { id = item.Id }, new { @class = "btn btn-danger btn-xs delete" })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+}
+@section scripts
+    {
+    <script>
+        $(function () {
+
+            $("a.delete").click(function () {
+                if (!confirm("Are you sure you need to delete this"))
+                    return false;
+            });
+            ////////////////////////////////////////////////////////////////////////
+        });
+    </script>
+}

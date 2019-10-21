@@ -1,22 +1,11 @@
 ﻿@model Health_Consulting_And_eChanneling.Models.ViewModels.Doctors.DoctorViewModel
 
 @{
-    ViewBag.Title = "Edit Doctor";
+    ViewBag.Title = "EditDoctor";
     Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="sub_page_title">Edit Doctor</h2>
-<style>
-    input#ImageName {
-        display: none;
-    }
-</style>
-@if (TempData["SM"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["SM"]
-    </div>
-}
+<h2>Doctor Edit</h2>
 
 @using (Html.BeginForm("EditDoctor", "Doctors", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -28,7 +17,7 @@
         @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2 e-medi-label" })
+            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
@@ -36,7 +25,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2 e-medi-label" })
+            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
@@ -44,7 +33,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2 e-medi-label" })
+            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
@@ -52,7 +41,15 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SLMC_Reg_No, htmlAttributes: new { @class = "control-label col-md-2 e-medi-label" })
+            @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SLMC_Reg_No, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.SLMC_Reg_No, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.SLMC_Reg_No, "", new { @class = "text-danger" })
@@ -60,7 +57,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ContactNumber, htmlAttributes: new { @class = "control-label col-md-2 e-medi-label" })
+            @Html.LabelFor(model => model.ContactNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ContactNumber, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ContactNumber, "", new { @class = "text-danger" })
@@ -70,23 +67,20 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2 e-medi-label" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" } })
                 <div class="col-md-10">
-                    <img src="/Images/Uploads/Doctors/@Model.Id/Thumbs/@Model.Image" alt="@Model.Image" />
+                    <img src="~/Content/Registration/Doctors/@Model.Id/Thumbs/@Model.Image" alt="@Model.Image" />
                     <br /><br />
                     <img id="imgpreview" src="#" />
                     <br /><br />
                     <div class="col-md-10">
                         <input type="file" name="file" id="ImageUpload" />
                     </div>
-
-
                 </div>
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.About, htmlAttributes: new { @class = "control-label col-md-2 e-medi-label" })
+            @Html.LabelFor(model => model.About, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextAreaFor(model => model.About, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.About, "", new { @class = "text-danger" })
@@ -110,7 +104,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back", "view-all-registed-doctors-list")
 </div>
 @section scripts
     {
@@ -135,5 +129,9 @@
             });
             //////////////////////////////////////////////////////////////////
         });
+    </script>
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace("About");
     </script>
 }

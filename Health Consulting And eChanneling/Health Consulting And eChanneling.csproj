@@ -136,12 +136,16 @@
     <Compile Include="Areas\Administrator\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Administrator\Controllers\DoctorsController.cs" />
     <Compile Include="Areas\Administrator\Controllers\DoctorSpecialistController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\MediServiceController.cs" />
     <Compile Include="Areas\Administrator\Controllers\NewsController.cs" />
     <Compile Include="Areas\Administrator\Controllers\PagesController.cs" />
     <Compile Include="Areas\Administrator\Controllers\ShopController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\FrontDoctorsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImportantNewsController.cs" />
+    <Compile Include="Controllers\MedicalServiceController.cs" />
     <Compile Include="Controllers\PagesController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Global.asax.cs">
@@ -151,6 +155,7 @@
     <Compile Include="Models\Data\Db.cs" />
     <Compile Include="Models\Data\DoctorDTO.cs" />
     <Compile Include="Models\Data\DoctorSpecialistDTO.cs" />
+    <Compile Include="Models\Data\MediServiceDTO.cs" />
     <Compile Include="Models\Data\NewsDTO.cs" />
     <Compile Include="Models\Data\OrderDetailsDTO.cs" />
     <Compile Include="Models\Data\OrderDTO.cs" />
@@ -168,7 +173,9 @@
     <Compile Include="Models\ViewModels\Cart\CartViewModel.cs" />
     <Compile Include="Models\ViewModels\Doctors\DoctorSpecialistViewModel.cs" />
     <Compile Include="Models\ViewModels\Doctors\DoctorViewModel.cs" />
+    <Compile Include="Models\ViewModels\Doctors\FullDoctorViewModel.cs" />
     <Compile Include="Models\ViewModels\Doctors\SpecialistAreaViewModel.cs" />
+    <Compile Include="Models\ViewModels\MediService\MediServiceViewModel.cs" />
     <Compile Include="Models\ViewModels\News\NewsViewModel.cs" />
     <Compile Include="Models\ViewModels\Pages\PageViewModel.cs" />
     <Compile Include="Models\ViewModels\Pages\SidebarViewModel.cs" />
@@ -515,17 +522,23 @@
     <Content Include="Areas\Administrator\Views\Shop\EditProduct.cshtml" />
     <Content Include="Areas\Administrator\Views\Doctors\AddNewDoctor.cshtml" />
     <Content Include="Areas\Administrator\Views\Doctors\Doctors.cshtml" />
-    <Content Include="Areas\Administrator\Views\Doctors\EditDoctor.cshtml" />
+    <Content Include="Areas\Administrator\Views\Doctors\EditDoctor1.cshtml" />
     <Content Include="Areas\Administrator\Views\Doctors\DoctorDetails.cshtml" />
     <Content Include="Areas\Administrator\Views\DoctorSpecialist\SpecialistCategory.cshtml" />
-    <Content Include="Areas\Administrator\Views\Doctors\DoctorRegistration.cshtml" />
+    <Content Include="Areas\Administrator\Views\Doctors\DoctorRegistration1.cshtml" />
     <Content Include="Areas\Administrator\Views\Doctors\DoctorDetailsAdd.cshtml" />
-    <Content Include="Areas\Administrator\Views\Doctors\LastRegisteredDoctor.cshtml" />
     <Content Include="Areas\Administrator\Views\News\NewsList.cshtml" />
     <Content Include="Areas\Administrator\Views\News\AddNewNewsArticle.cshtml" />
     <Content Include="Areas\Administrator\Views\News\EditNews.cshtml" />
     <Content Include="Areas\Administrator\Views\News\DetailsNews.cshtml" />
     <Content Include="Areas\Administrator\Views\Doctors\UpdateNewDoctor.cshtml" />
+    <Content Include="Areas\Administrator\Views\Doctors\DoctorRegistration2.cshtml" />
+    <Content Include="Areas\Administrator\Views\Doctors\DoctorRegistration.cshtml" />
+    <Content Include="Areas\Administrator\Views\Doctors\EditDoctor.cshtml" />
+    <Content Include="Areas\Administrator\Views\MediService\MedicalServiceList.cshtml" />
+    <Content Include="Areas\Administrator\Views\MediService\CreateNewService.cshtml" />
+    <Content Include="Areas\Administrator\Views\MediService\EditMediService.cshtml" />
+    <Content Include="Areas\Administrator\Views\MediService\MediServiceDetails.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor.php" />
@@ -922,11 +935,14 @@
     <Content Include="Views\Account\CreateAccount.cshtml" />
     <Content Include="Views\ImportantNews\NewsList.cshtml" />
     <Content Include="Views\ImportantNews\Index.cshtml" />
+    <Content Include="Views\FrontDoctors\Doctors.cshtml" />
+    <Content Include="Views\MedicalService\MedicalServiceList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Administrator\Models\" />
     <Folder Include="Content\HealthConsultAllCSS\" />
+    <Folder Include="Content\MediService\Images\" />
     <Folder Include="Content\News\Images\" />
     <Folder Include="Content\Registration\Doctors\" />
     <Folder Include="Content\Registration\Users\" />
@@ -936,6 +952,7 @@
     <Folder Include="fileman\tmp\" />
     <Folder Include="fileman\Uploads\Documents\" />
     <Folder Include="fileman\Uploads\FLV\" />
+    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -19,6 +19,7 @@ namespace Health_Consulting_And_eChanneling.Models.ViewModels.Doctors
             FirstName = row.FirstName;
             LastName = row.LastName;
             Username = row.Username;
+            EmailAddress = row.EmailAddress;
             SLMC_Reg_No = row.SLMC_Reg_No;
             ContactNumber = row.ContactNumber;
             Image = row.Image;
@@ -29,14 +30,10 @@ namespace Health_Consulting_And_eChanneling.Models.ViewModels.Doctors
             UserId = row.UserId;
         }
         public int Id { get; set; }
-        [Required]
-        [Display(Name = "First Name :")]
         public string FirstName { get; set; }
-        [Required]
-        [Display(Name = "Last Name :")]
         public string LastName { get; set; }
-        [Required]
         public string Username { get; set; }
+        public string EmailAddress { get; set; }
         [Required]
         [Display(Name = "SLMC Reg. No. :")]
         public string SLMC_Reg_No { get; set; }
@@ -46,11 +43,15 @@ namespace Health_Consulting_And_eChanneling.Models.ViewModels.Doctors
         [Display(Name = "Profile Image (Optianal) :")]
         public string Image { get; set; }
         [Display(Name = "About Doctor (Optianal) :")]
+        [AllowHtml]
         public string About { get; set; }
         [Display(Name = "Specialist :")]
         public string SpecialistAreaName { get; set; }
         public int SpecialistAreaId { get; set; }
+        [Required]
         public string Password { get; set; }
+        [Required]
+        public string ConfirmPassword { get; set; }
         public int UserId { get; set; }
 
         public IEnumerable<SelectListItem> SpecialistArea { get; set; }

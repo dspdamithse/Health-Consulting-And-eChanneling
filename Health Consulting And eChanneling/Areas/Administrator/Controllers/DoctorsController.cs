@@ -9,32 +9,37 @@ using System.Web.Helpers;
 using System.Web.Mvc;
 using PagedList;
 using Health_Consulting_And_eChanneling.Models.ViewModels.Account;
+using System.Linq;
 
 namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
 {
     public class DoctorsController : Controller
     {
         [HttpGet]
-        [ActionName("registration")]
         public ActionResult DoctorRegistration()
         {
-            return View("DoctorRegistration");
+            DoctorViewModel model = new DoctorViewModel();
+
+            using (Db db = new Db())
+            {
+                model.SpecialistArea = new SelectList(db.DoctorSpecialist.ToList(), "Id", "Name");
+            }
+            return View("DoctorRegistration", model);
         }
 
-        [ActionName("registration")]
         [HttpPost]
-        public ActionResult DoctorRegistration(UserViewModel model, HttpPostedFileBase file)
+        public ActionResult DoctorRegistration(DoctorViewModel model, HttpPostedFileBase file)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("DoctorRegistration", model);
-            }
-            if (!model.Password.Equals(model.ConfirmPassword))
-            {
-                ModelState.AddModelError("", "Password and Confirm password are not match");
-                return View("DoctorRegistration", model);
-            }
             int userid;
+            int doctorid;
+            /*if (!ModelState.IsValid)
+            {
+                using (Db db = new Db())
+                {
+                    model.SpecialistArea = new SelectList(db.DoctorSpecialist.ToList(), "Id", "Name");
+                    return View(model);
+                }
+            }*/
             using (Db db = new Db())
             {
                 if (db.Users.Any(x => x.Username.Equals(model.Username)))
@@ -49,21 +54,48 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
                     model.EmailAddress = "";
                     return View("DoctorRegistration", model);
                 }
-                UserDTO userDTO = new UserDTO()
-                {
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    EmailAddress = model.EmailAddress,
-                    Username = model.Username,
-                    Password = model.Password
-                };
+
+            }
+
+            using (Db db = new Db())
+            {
+                UserDTO userDTO = new UserDTO();
+                userDTO.FirstName = model.FirstName;
+                userDTO.LastName = model.LastName;
+                userDTO.Username = model.Username;
+                userDTO.EmailAddress = model.EmailAddress;
+                userDTO.Username = model.Username;
+                userDTO.Password = "12345";
 
                 db.Users.Add(userDTO);
-
                 db.SaveChanges();
 
-                int id = userDTO.Id;
                 userid = userDTO.Id;
+            }
+            using (Db db = new Db())
+            {
+                DoctorDTO doctorDTO = new DoctorDTO();
+                doctorDTO.FirstName = model.FirstName;
+                doctorDTO.LastName = model.LastName;
+                doctorDTO.Username = model.Username;
+                doctorDTO.SLMC_Reg_No = model.SLMC_Reg_No;
+                doctorDTO.ContactNumber = model.ContactNumber;
+                doctorDTO.Image = model.Image;
+                doctorDTO.About = model.About;
+                doctorDTO.SpecialistAreaId = model.SpecialistAreaId;
+                doctorDTO.SpecialistAreaName = model.SpecialistAreaName;
+                doctorDTO.UserId = userid;
+                doctorDTO.Password = "12345";
+
+                DoctorSpecialistDTO specDTO = db.DoctorSpecialist.FirstOrDefault(x => x.Id == model.SpecialistAreaId);
+                doctorDTO.SpecialistAreaName = specDTO.Name;
+
+                db.Doctors.Add(doctorDTO);
+                db.SaveChanges();
+
+                int id = userid;
+                doctorid = doctorDTO.Id;
+
                 UserRoleDTO userRoleDto = new UserRoleDTO()
                 {
                     UserId = id,
@@ -71,14 +103,17 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
                 };
                 db.UserRoles.Add(userRoleDto);
                 db.SaveChanges();
-
             }
             TempData["SM"] = "Successfully Registered";
             var originalDirectory = new DirectoryInfo(string.Format("{0}Content\\Registration", Server.MapPath(@"\")));
 
             string pathString1 = Path.Combine(originalDirectory.ToString(), "Doctors");
-            string pathString2 = Path.Combine(originalDirectory.ToString(), "Doctors\\" + userid.ToString());
-            string pathString3 = Path.Combine(originalDirectory.ToString(), "Doctors\\" + userid.ToString() + "\\Thumbs");
+            string pathString2 = Path.Combine(originalDirectory.ToString(), "Doctors\\" + doctorid.ToString());
+            string pathString3 = Path.Combine(originalDirectory.ToString(), "Doctors\\" + doctorid.ToString() + "\\Thumbs");
+
+            string pathString4 = Path.Combine(originalDirectory.ToString(), "Users");
+            string pathString5 = Path.Combine(originalDirectory.ToString(), "Users\\" + userid.ToString());
+            string pathString6 = Path.Combine(originalDirectory.ToString(), "Users\\" + userid.ToString() + "\\Thumbs");
 
             if (!Directory.Exists(pathString1))
                 Directory.CreateDirectory(pathString1);
@@ -86,6 +121,13 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
                 Directory.CreateDirectory(pathString2);
             if (!Directory.Exists(pathString3))
                 Directory.CreateDirectory(pathString3);
+          
+            if (!Directory.Exists(pathString4))
+                Directory.CreateDirectory(pathString4);
+            if (!Directory.Exists(pathString5))
+                Directory.CreateDirectory(pathString5);
+            if (!Directory.Exists(pathString6))
+                Directory.CreateDirectory(pathString6);
 
             if (file != null && file.ContentLength > 0)
             {
@@ -102,37 +144,32 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
                 string imageName = file.FileName;
                 using (Db db = new Db())
                 {
-                    UserDTO dto = db.Users.Find(userid);
-                    dto.ProfileImage = imageName;
+                    DoctorDTO dto = db.Doctors.Find(doctorid);
+                    dto.Image = imageName;
+
+                    db.SaveChanges();
+
+                    UserDTO udto = db.Users.Find(userid);
+                    udto.ProfileImage = imageName;
 
                     db.SaveChanges();
                 }
                 var path = string.Format("{0}\\{1}", pathString2, imageName);
                 var path2 = string.Format("{0}\\{1}", pathString3, imageName);
 
+                var path3 = string.Format("{0}\\{1}", pathString5, imageName);
+                var path4 = string.Format("{0}\\{1}", pathString6, imageName);
+
                 file.SaveAs(path);
+                file.SaveAs(path3);
 
                 WebImage img = new WebImage(file.InputStream);
                 img.Resize(200, 200);
                 img.Save(path2);
+                img.Save(path4);
             }
 
-            return Redirect("~/Doctor/newly-registered-doctor");
-        }
-
-        [HttpGet]
-        [ActionName("newly-registered-doctor")]
-        public ActionResult LastRegisteredDoctor()
-        {
-            List<UserViewModel> LastDoctordetails;
-            using (Db db = new Db())
-            {
-                UserDTO doctor = db.Users.OrderByDescending(p => p.Id).First();
-                int doctorId = doctor.Id;
-                LastDoctordetails = db.Users.ToArray().Where(x => x.Id == doctorId).Select(x => new UserViewModel(x)).ToList();
-            }
-                
-            return View("LastRegisteredDoctor", LastDoctordetails);
+            return Redirect("~/Administrator/Doctors/view-all-registed-doctors-list");
         }
 
         [HttpGet]
@@ -308,7 +345,6 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
             return RedirectToAction("view-all-registed-doctors-list");
         }
 
-        [ActionName("view-all-registed-doctors-list")]
         public ActionResult Doctors(int? page, int? catId)
         {
             List<DoctorViewModel> listOfDoctorVM;
@@ -341,7 +377,7 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
                 DoctorDTO dto = db.Doctors.Find(id);
                 if (dto == null)
                 {
-                    return Content("Doctor is Alredy Registered");
+                    return Content("Doctor is not available");
                 }
                 model = new DoctorViewModel(dto);
 
@@ -353,6 +389,7 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
         public ActionResult EditDoctor(DoctorViewModel model, HttpPostedFileBase file)
         {
             int id = model.Id;
+            int userid;
             using (Db db = new Db())
             {
                 model.SpecialistArea = new SelectList(db.DoctorSpecialist.ToList(), "Id", "Name");
@@ -370,6 +407,18 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
                     ModelState.AddModelError("", "Username Alredy exist");
                     return View(model);
                 }
+            }
+
+            using (Db db = new Db())
+            {
+                DoctorDTO dto = db.Doctors.Find(id);
+                userid = dto.UserId;
+                UserDTO doctor = db.Users.Find(userid);
+                doctor.FirstName = model.FirstName;
+                doctor.LastName = model.LastName;
+                doctor.EmailAddress = model.EmailAddress;
+
+                db.SaveChanges();
             }
 
             using (Db db = new Db())
@@ -402,24 +451,39 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
                         return View(model);
                     }
                 }
-                var originalDirectory = new DirectoryInfo(string.Format("{0}Images\\Uploads", Server.MapPath(@"\")));
+                var originalDirectory = new DirectoryInfo(string.Format("{0}Content\\Registration", Server.MapPath(@"\")));
 
                 string pathString1 = Path.Combine(originalDirectory.ToString(), "Doctors\\" + id.ToString());
                 string pathString2 = Path.Combine(originalDirectory.ToString(), "Doctors\\" + id.ToString() + "\\Thumbs");
 
+                string pathString3 = Path.Combine(originalDirectory.ToString(), "Users\\" + userid.ToString());
+                string pathString4 = Path.Combine(originalDirectory.ToString(), "Users\\" + userid.ToString() + "\\Thumbs");
+
                 DirectoryInfo dir1 = new DirectoryInfo(pathString1);
                 DirectoryInfo dir2 = new DirectoryInfo(pathString2);
+
+                DirectoryInfo dir3 = new DirectoryInfo(pathString3);
+                DirectoryInfo dir4 = new DirectoryInfo(pathString4);
 
                 foreach (FileInfo file2 in dir1.GetFiles())
                     file2.Delete();
                 foreach (FileInfo file3 in dir2.GetFiles())
                     file3.Delete();
 
+                foreach (FileInfo file4 in dir3.GetFiles())
+                    file4.Delete();
+                foreach (FileInfo file5 in dir4.GetFiles())
+                    file5.Delete();
+
                 string imageName = file.FileName;
                 using (Db db = new Db())
                 {
                     DoctorDTO dto = db.Doctors.Find(id);
                     dto.Image = imageName;
+                    db.SaveChanges();
+
+                    UserDTO udto = db.Users.Find(userid);
+                    udto.ProfileImage = imageName;
 
                     db.SaveChanges();
                 }
@@ -428,11 +492,17 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
 
                 file.SaveAs(path);
 
+                var path3 = string.Format("{0}\\{1}", pathString3, imageName);
+                var path4 = string.Format("{0}\\{1}", pathString4, imageName);
+
+                file.SaveAs(path3);
+
                 WebImage img = new WebImage(file.InputStream);
                 img.Resize(200, 200);
                 img.Save(path2);
+                img.Save(path4);
             }
-            return RedirectToAction("view-all-registed-doctors-list");
+            return RedirectToAction("Doctors");
         }
 
         [ActionName("view-doctors-view-details")]

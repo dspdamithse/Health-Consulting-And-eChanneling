@@ -15,6 +15,7 @@ namespace Health_Consulting_And_eChanneling.Models.Data
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Username { get; set; }
+        public string EmailAddress { get; set; }
         public string SLMC_Reg_No { get; set; }
         public string ContactNumber { get; set; }
         public string Image { get; set; }

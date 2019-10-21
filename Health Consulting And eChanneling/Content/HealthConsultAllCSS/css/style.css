@@ -1470,3 +1470,13 @@ h6 {
     padding: 100px 0 20px 0;
   }
 }
+.DoctorImageCheck {
+    border-radius: 27px;
+    color: black;
+    box-shadow: 8px 10px 12px;
+}
+.DoctorImageCheck:hover {
+    border-radius: 27px;
+    color: #802a2a;
+    box-shadow: 8px 10px 12px;
+}

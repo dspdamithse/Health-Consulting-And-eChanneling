@@ -52,7 +52,7 @@ else
                     <img style="border-radius: 50%;" src="~/Content/News/Images/@item.Id/Thumbs/@item.Image" alt="@item.Image" />
                 </td>
                 <td>
-                    <a class="btn btn-info btn-ex" href="/Administrator/News/DetailsNews/1">Content</a>
+                    @Html.Raw(item.Content)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "EditNews", new { id = item.Id }) |

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Health_Consulting_And_eChanneling.Models.ViewModels.MediService.MediServiceViewModel>
+
+@{
+    ViewBag.Title = "MedicalServiceList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Medical Service</h2>
+
+<table style="border-collapse: collapse;" class="table">
+
+    @foreach (var item in Model)
+    {
+        <tr class="MediService" style="box-shadow: 1px 4px 14px; color: black; padding: 2px; border-radius: 10px;">
+            <td>
+                <a class="serviceImg" href="~/">
+                    <img style="width:200px; height:200px" class="img-responsive DoctorImageCheck" src="~/Content/MediService/Images/@item.Id/Thumbs/@item.Image" alt="@item.Image" />
+                </a>
+            </td>
+            <td>
+                @Html.Raw(item.Content) <br />
+                @Html.ActionLink("Details", "Details", new { id = item.Id })
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+            </td>
+        </tr>
+    }
+
+</table>

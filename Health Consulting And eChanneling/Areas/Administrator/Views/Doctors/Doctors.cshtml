@@ -29,7 +29,7 @@
 
 
 <div>
-    <a class="btn btn-info" href="~/Administrator/Doctors/new-doctor-registration">Add New Doctor</a>
+    <a class="btn btn-info" href="~/Administrator/Doctors/DoctorRegistration">Add New</a>
 </div>
 
 
@@ -70,11 +70,11 @@
             </td>
             <td>
                 <a href="/administrator/Doctors/EditDoctor/@item.Id">
-                    <img src="/Images/Uploads/Doctors/@item.Id/Thumbs/@item.Image" width="100" height="100"/>
+                    <img src="~/Content/Registration/Doctors/@item.Id/Thumbs/@item.Image" width="100" height="100"/>
                 </a>
             </td>
             <td>
-                @item.About
+                @Html.Raw(!String.IsNullOrEmpty(item.About) ? item.About.Substring(0, Math.Min(item.About.Length, 50)) : item.About)
             </td>
             <td>
                 @item.SpecialistAreaName
@@ -100,7 +100,7 @@
                 var url = $(this).val();
 
                 if (url) {
-                    window.location = "/administrator/Doctors/view-all-registed-doctors-list?catId="+url;
+                    window.location = "/administrator/Doctors/Doctors?catId="+url;
                 }
                 return false;
             });

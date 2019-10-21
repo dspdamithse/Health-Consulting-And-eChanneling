@@ -23,6 +23,9 @@
             <nav class="main-nav float-right d-none d-lg-block">
                 <ul>
                     <li class="active"><a href="/">Home</a></li>
+                    <li class="active"><a href="~/our-doctors/all-doctors">Doctors</a></li>
+                    <li class="active"><a href="~/medical-services/all-services">Medical Service</a></li>
+                    <li class="active"><a href="~/medical-services/all-services">Appointment</a></li>
                     <li class="active"><a href="~/important-news/all-news-articals">News</a></li>
                     @if (Request.IsAuthenticated)
                     {
@@ -104,22 +107,10 @@
     }
     <!-- #intro -->
     <div class="container body-content section_Indent_Apply">
-        <div class="row">
-            @if (ViewBag.HasSidebar == "Yes")
-            {
-                <div class="col-xs-12 col-md-7">
-                    @RenderBody()
-                </div>
-                <div class="col-xs-12 col-md-3">
-                    @Html.Action("SidebarPartial", "Pages")
-                </div>
-            }
-            else
-            {
-                <div class="col-xs-12 col-md-10">
-                    @RenderBody()
-                </div>
-            }
+        <div class="row">            
+            <div class="col-xs-12 col-md-12">
+                @RenderBody()
+            </div>
         </div>
 
         <hr />

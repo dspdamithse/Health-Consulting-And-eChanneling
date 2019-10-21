@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Health_Consulting_And_eChanneling.Models.ViewModels.Doctors.DoctorViewModel>
+
+@{
+    ViewBag.Title = "Doctors";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="sub_page_title">Doctors</h2>
+@using PagedList.Mvc;
+@using PagedList;
+
+
+        <select id="SelectDoctor" name="SelectDoctor">
+            <option value="0">All</option>
+            @foreach (var item in ViewBag.SpecialistArea)
+            {
+                if (ViewBag.SelectedCat == item.Value)
+                {
+                    <option selected="selected" value="@item.Value">@item.Text</option>
+                }
+                else
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            }
+            }
+        </select>
+        <br /><br /><br /><br />
+        <table class="table">
+            <tr>
+                <th>
+                    Image
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    SLMC Reg. No.
+                </th>
+                <th>
+                    About
+                </th>
+                <th>
+                    Specialist
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in ViewBag.OnePageOfProducts)
+            {
+                <tr>
+                    <td>
+                        <a href="~/">
+                            <img src="~/Content/Registration/Doctors/@item.Id/Thumbs/@item.Image" width="100" height="100" />
+                        </a>
+                    </td>
+                    <td>
+                        @item.FirstName @item.LastName
+                    </td>
+                    <td>
+                        @item.SLMC_Reg_No
+                    </td>
+                    <td>
+                        @Html.Raw(item.About)
+                    </td>
+                    <td>
+                        @item.SpecialistAreaName
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+
+
+
+@Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("Doctors", new { page, catId = ViewBag.SelectedCat }))
+@section scripts
+    {
+
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <script>
+        $(function () {
+
+            $("#SelectDoctor").on("change", function () {
+                var url = $(this).val();
+
+                if (url) {
+                    window.location = "/our-doctors/all-doctors?catId="+url;
+                }
+                return false;
+            });
+        });
+    </script>
+}

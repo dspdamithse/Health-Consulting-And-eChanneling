@@ -1,13 +1,13 @@
-﻿@model Health_Consulting_And_eChanneling.Models.ViewModels.Account.UserViewModel
+﻿@model Health_Consulting_And_eChanneling.Models.ViewModels.Doctors.DoctorViewModel
 
 @{
     ViewBag.Title = "DoctorRegistration";
     Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Doctor Registration First Section</h2>
+<h2>DoctorRegistration</h2>
 
-@using (Html.BeginForm("registration", "Doctors", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("DoctorRegistration", "Doctors", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -31,22 +31,6 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2" for="ProfileImage">User Image</label>
-            <div class="col-md-10">
-                <input type="file" name="file" id="ImageUpload" />
-                <img id="imgpreview" src="#" />
-            </div>
-        </div>
-
-        <div class="form-group">
             @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
@@ -55,18 +39,50 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2" for="Password">Password : </label>
+            @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-2" for="ConfirmPassword">Confirm Password : </label>
+            @Html.LabelFor(model => model.SLMC_Reg_No, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.SLMC_Reg_No, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SLMC_Reg_No, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ContactNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ContactNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ContactNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="ProfileImage">Doctor Image</label>
+            <div class="col-md-10">
+                <input type="file" name="file" id="ImageUpload" />
+                <img id="imgpreview" src="#" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" for="About">About Doctor (Optianal)</label>
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.About, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.About, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SpecialistAreaName, htmlAttributes: new { @class = "control-label col-md-2 e-medi-label" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.SpecialistAreaId, Model.SpecialistArea, "Select Specialist Field", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.SpecialistAreaName, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -78,6 +94,9 @@
     </div>
 }
 
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
 @section scripts
     {
     <script>
@@ -104,5 +123,8 @@
 
         });
     </script>
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace("About");
+    </script>
 }
-

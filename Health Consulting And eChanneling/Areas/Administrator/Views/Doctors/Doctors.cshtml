@@ -74,7 +74,7 @@
                 </a>
             </td>
             <td>
-                @Html.Raw(!String.IsNullOrEmpty(item.About) ? item.About.Substring(0, Math.Min(item.About.Length, 50)) : item.About)
+                @Html.Raw(item.About)
             </td>
             <td>
                 @item.SpecialistAreaName

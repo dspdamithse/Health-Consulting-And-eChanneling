@@ -183,6 +183,23 @@ namespace Health_Consulting_And_eChanneling.Controllers
             }    
             return PartialView(model);
         }
+        public ActionResult DoctorNavPartial()
+        {
+            string username = User.Identity.Name;
+
+            UserNavPartialViewModel model;
+            using (Db db = new Db())
+            {
+                UserDTO dto = db.Users.FirstOrDefault(x => x.Username == username);
+
+                model = new UserNavPartialViewModel()
+                {
+                    FirstName = dto.FirstName,
+                    LastName = dto.LastName
+                };
+            }
+            return PartialView(model);
+        }
 
         [HttpGet]
         [ActionName("user-profile")]
@@ -192,13 +209,18 @@ namespace Health_Consulting_And_eChanneling.Controllers
 
             UserProfileViewModel model;
 
+            int id = 0;
             using (Db db=new Db())
             {
                 UserDTO dto = db.Users.FirstOrDefault(x=>x.Username == username);
+                id = dto.Id;
 
                 model = new UserProfileViewModel(dto);
             }
-           return View("UserProfile", model);
+
+            model.MedicalImages = Directory.EnumerateFiles(Server.MapPath("~/Content/MedicalImages/1/"))
+                                               .Select(fn => Path.GetFileName(fn));
+            return View("UserProfile", model);
         }
         [HttpPost]
         [ActionName("user-profile")]

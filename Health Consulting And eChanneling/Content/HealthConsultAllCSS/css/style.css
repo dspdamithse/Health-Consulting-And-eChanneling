@@ -772,13 +772,27 @@ h6 {
   font-size: 14px;
   color: #cce5ff;
 }
-
+.sub_page_title {
+    color: #99ef98;
+    font-weight: 600;
+    padding: 10px 5px;
+    box-shadow: 0px 5px 2px;
+}
+.SelectDoctor {
+    padding: 4px;
+    border-radius: 14px;
+    border: 2px solid;
+    color: #7d8416;
+    font-weight: 600;
+}
+.SelectDoctor:hover {
+    box-shadow: 0px 2px 10px;
+}
 /* Portfolio Section
 --------------------------------*/
-
 #portfolio {
-  padding: 60px 0;
-  box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
+    padding: 60px 0;
+    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
 }
 
 #portfolio #portfolio-flters {
@@ -1479,4 +1493,41 @@ h6 {
     border-radius: 27px;
     color: #802a2a;
     box-shadow: 8px 10px 12px;
+}
+.home_heading {
+    height: 400px;
+    width: 100%;
+    background-image: url("main_img.jpg");
+    margin-top: 100px;
+}
+.home_section_one {
+    background-color: aqua;
+    padding: 30px;
+    text-align: left;
+}
+.home_section_two {
+    background-color: aqua;
+    padding: 30px;
+    text-align: right;
+}
+
+#home_section_two {
+    animation-duration: 1s;
+    animation-delay: 1s;
+}
+.home_section_three {
+    background-color: aqua;
+    padding: 30px;
+    text-align: left;
+}
+
+#home_section_three {
+    animation-duration: 1s;
+    animation-delay: 2s;
+}
+.home_img_list {
+    border: 1px solid black;
+    border-radius: 20px;
+    box-shadow: 0px 0px 22px;
+    color: black;
 }

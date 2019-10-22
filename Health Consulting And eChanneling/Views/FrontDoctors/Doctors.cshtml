@@ -5,12 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="sub_page_title">Doctors</h2>
+<h2 class="sub_page_title">Our Doctors</h2>
 @using PagedList.Mvc;
 @using PagedList;
 
 
-        <select id="SelectDoctor" name="SelectDoctor">
+        <select id="SelectDoctor" class="SelectDoctor" name="SelectDoctor">
             <option value="0">All</option>
             @foreach (var item in ViewBag.SpecialistArea)
             {
@@ -25,45 +25,30 @@
             }
             }
         </select>
-        <br /><br /><br /><br />
+        <br /><br />
         <table class="table">
-            <tr>
-                <th>
-                    Image
-                </th>
-                <th>
-                    Name
-                </th>
-                <th>
-                    SLMC Reg. No.
-                </th>
-                <th>
-                    About
-                </th>
-                <th>
-                    Specialist
-                </th>
-                <th></th>
-            </tr>
 
             @foreach (var item in ViewBag.OnePageOfProducts)
             {
                 <tr>
                     <td>
                         <a href="~/">
-                            <img src="~/Content/Registration/Doctors/@item.Id/Thumbs/@item.Image" width="100" height="100" />
+                            <img style="    border-radius: 23px; color: black; box-shadow: 0px 0px 6px;" src="~/Content/Registration/Doctors/@item.Id/Thumbs/@item.Image" width="200" height="200" />
                         </a>
                     </td>
                     <td>
+                        <br /><br /><br />
                         @item.FirstName @item.LastName
                     </td>
                     <td>
+                        <br /><br /><br />
                         @item.SLMC_Reg_No
                     </td>
                     <td>
                         @Html.Raw(item.About)
                     </td>
                     <td>
+                        <br /><br /><br />
                         @item.SpecialistAreaName
                     </td>
                 </tr>

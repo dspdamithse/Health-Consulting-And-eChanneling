@@ -1,79 +1,45 @@
 ﻿@model Health_Consulting_And_eChanneling.Models.ViewModels.Account.UserProfileViewModel
 
 @{
-    ViewBag.Title = "User Profile";
+    ViewBag.Title = "UserProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="sub_page_title">User Profile</h2>
-@if (TempData["SM"] != null)
-{
-    <div class="alert alert-success">
-        @TempData["SM"]
+    <h2>@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <div class="col-xs-12 col-md=4">
+            <img style="border-radius: 50%; width: 200px; height: 200px; box-shadow: 0px 0px 22px;" src="~/Content/Registration/Users/@Model.Id/Thumbs/@Model.ProfileImage" />
+        </div>
+
+
+    </dl>
+</div>
+<div class="row">
+    <h4 class="sub_page_title">Medical Images</h4>
+    <div class="col-xs-12 fancyboxdiv">
+        <br /><br />
+        @foreach (var image in Model.MedicalImages)
+        {
+            <div style="display:inline-block">
+                <a class="fancybox" rel="gallery1" href="~/Content/MedicalImages/1/@image">
+                    <img style="width: 100px; height: 100px; box-shadow: 0px 0px 11px; color: black; margin-bottom: 10px;" src="~/Content/MedicalImages/1/@image" />
+                </a>
+            </div>
+        }
     </div>
-}
-
-@using (Html.BeginForm())
+</div>
+<link href="~/Content/jquery.fancybox.css" rel="stylesheet" />
+@section scripts
 {
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
-
-        <div class="form-group">
-            <label class="control-label col-md-2" for="FirstName">First Name : </label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2" for="LastName">Last Name : </label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2" for="EmailAddress">Email : </label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2" for="Username">Username : </label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2" for="Password">Password : </label>
-            <div class="col-md-10">
-                @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2" for="ConfirmPassword">Confirm Password : </label>
-            <div class="col-md-10">
-                @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input class="btn btn-info" type="submit" value="Edit Profile" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
+    <script src="~/Scripts/jquery.fancybox.js"></script>
+    <script>
+        $(function () {
+            $(".fancybox").fancybox();
+        });
+    </script>
 }
 

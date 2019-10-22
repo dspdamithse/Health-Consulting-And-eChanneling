@@ -21,179 +21,193 @@
             </div>
 
             <nav class="main-nav float-right d-none d-lg-block">
-                <ul>
-                    <li class="active"><a href="/">Home</a></li>
-                    <li class="active"><a href="~/our-doctors/all-doctors">Doctors</a></li>
-                    <li class="active"><a href="~/medical-services/all-services">Medical Service</a></li>
-                    <li class="active"><a href="~/medical-services/all-services">Appointment</a></li>
-                    <li class="active"><a href="~/important-news/all-news-articals">News</a></li>
-                    @if (Request.IsAuthenticated)
-                    {
-                        <li><a href="/account/logout">Logout</a></li>
-                    }
-                    else
-                    {
-                        if (ViewBag.Title == "Login")
-                        {
-                            <li class="active"><a href="/account/login">Login</a></li>
-                        }
-                        else
-                        {
-                            <li><a href="/account/login">Login</a></li>
-                        }
+                <ul id="SideList">
+                    <li id="home"><a href="/">Home</a></li>
+                    <li id="doctor"><a href="~/our-doctors/all-doctors">Doctors</a></li>
+                    <li id="service"><a href="~/medical-services/all-services">Medical Service</a></li>
+                    <li id="appointment"><a href="~/medical-services/all-services">Appointment</a></li>
+                    <li id="news"><a href="~/important-news/all-news-articals">News</a></li>
 
-                    }
-                    @if (Request.IsAuthenticated && User.IsInRole("User"))
-                    {
-                        if (ViewBag.Title == "User Profile")
-                        {
-                            <li class="active">@Html.Action("UserNavPartial", "Account")</li>
-                        }
-                        else
-                        {
-                            <li>@Html.Action("UserNavPartial", "Account")</li>
-                        }
-                    }
+
+
                     <li class="drop-down">
-                        <a href="">Drop Down</a>
+                        <a>Account Info</a>
                         <ul>
-                            <li><a href="#">Drop Down 1</a></li>
-                            <li class="drop-down">
-                                <a href="#">Drop Down 2</a>
-                                <ul>
-                                    <li><a href="#">Deep Drop Down 1</a></li>
-                                    <li><a href="#">Deep Drop Down 2</a></li>
-                                    <li><a href="#">Deep Drop Down 3</a></li>
-                                    <li><a href="#">Deep Drop Down 4</a></li>
-                                    <li><a href="#">Deep Drop Down 5</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Drop Down 3</a></li>
-                            <li><a href="#">Drop Down 4</a></li>
-                            <li><a href="#">Drop Down 5</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-                {
-                    <ul class="nav navbar-nav navbar-right adminarea">
-                        <li>@Html.ActionLink("Dashboard", "Index", "Dashboard", new { area = "Administrator" }, null)</li>
+                            <li>
+                                @if (Request.IsAuthenticated && (User.IsInRole("User") || User.IsInRole("Doctor")))
+                                {
+                                    if (ViewBag.Title == "User Profile")
+                                    {
+                                    <li class="active">@Html.Action("UserNavPartial", "Account")</li>
+                                }
+                                else
+                                {
+                                    <li>@Html.Action("UserNavPartial", "Account")</li>
+                                }
+                            }
+                        </li>
+                        @if (Request.IsAuthenticated)
+                        {
+                            <li><a href="/account/logout">Logout</a></li>
+                        }
+                        else
+                        {
+                            if (ViewBag.Title == "Login")
+                            {
+                                <li class="active"><a href="/account/login">Login</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="/account/login">Login</a></li>
+                            }
+
+                        }
+                        <li><a href="#">Drop Down 3</a></li>
                     </ul>
-                }
-                
-            </nav><!-- .main-nav -->
+                    </li>
+                    </ul>
+                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <ul class="nav navbar-nav navbar-right adminarea">
+                            <li>@Html.ActionLink("Dashboard", "Index", "Dashboard", new { area = "Administrator" }, null)</li>
+                        </ul>
+                    }
 
-        </div>
-    </header><!-- #header -->
-    @if (ViewBag.Title == "Home")
-    {
-    <section id="intro" class="clearfix">
-        <div class="container">
+                </nav><!-- .main-nav -->
 
-            <div class="intro-img">
-                <img src="~/Content/HealthConsultAllCSS/img/intro-img.svg" alt="" class="img-fluid" />
             </div>
-
-            <div class="intro-info">
-                <h2>Competative Services<br>Any Kind Of Health Problems</h2>
-                <div>
-                    <a href="#about" class="btn-get-started scrollto">Get Started</a>
-                    <a href="#services" class="btn-services scrollto">Our Services</a>
+        </header><!-- #header -->
+        @if (ViewBag.Title == "Home")
+        {
+            <div class="container home_heading">
+                <h4 style="text-align:center">eMediHealth</h4>
+            </div>
+            <br /><br />
+            <div id="home_section_one" class="container home_section_one animated fadeIn bounce">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img class="img-responsive home_img_list" src="~/Content/images/download.jpg" />
+                    </div>
+                    <div class="col-md-8">
+                        <h4>Doctors</h4>
+                        <button class="btn btn-xs btn-info ">more</button>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div id="home_section_two" class="container home_section_two animated fadeIn">
+                <div class="row">
+                    <h3>Hello</h3>
+                </div>
+            </div>
+            <br />
+            <div id="home_section_three" class="container home_section_three animated fadeIn">
+                <div class="row">
+                    <h3>Hello</h3>
+                </div>
+            </div>
+        }
+        <!-- #intro -->
+        <div class="container body-content section_Indent_Apply">
+            <div class="row">
+                <div class="col-xs-12 col-md-12">
+                    @RenderBody()
                 </div>
             </div>
 
+            <hr />
         </div>
-    </section>
-    }
-    <!-- #intro -->
-    <div class="container body-content section_Indent_Apply">
-        <div class="row">            
-            <div class="col-xs-12 col-md-12">
-                @RenderBody()
-            </div>
-        </div>
+        <!--==========================
+          Footer
+        ============================-->
+        <footer id="footer">
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row">
 
-        <hr />
-    </div>
-    <!--==========================
-      Footer
-    ============================-->
-    <footer id="footer">
-        <div class="footer-top">
-            <div class="container">
-                <div class="row">
+                        <div class="col-lg-4 col-md-6 footer-info">
+                            <h3>eMediHealth</h3>
+                            <p>
+                                Find out who we are, what we do and why eMedihealth Care is the leading provider of international health and wellbeing in the world.
+                                eMedihealth Care offers health, life and disability insurance and a range of health and protection services to employers and insurance partners worldwide.
 
-                    <div class="col-lg-4 col-md-6 footer-info">
-                        <h3>eMediHealth</h3>
-                        <p>
-                            Find out who we are, what we do and why eMedihealth Care is the leading provider of international health and wellbeing in the world.
-                            eMedihealth Care offers health, life and disability insurance and a range of health and protection services to employers and insurance partners worldwide.
+                                Globally mobile individuals and families
+                            </p>
+                        </div>
 
-                            Globally mobile individuals and families
-                        </p>
-                    </div>
+                        <div class="col-lg-2 col-md-6 footer-links">
+                            <h4>Useful Links</h4>
+                            <ul>
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">About us</a></li>
+                                <li><a href="#">Services</a></li>
+                                <li><a href="#">Terms of service</a></li>
+                                <li><a href="#">Privacy policy</a></li>
+                            </ul>
+                        </div>
 
-                    <div class="col-lg-2 col-md-6 footer-links">
-                        <h4>Useful Links</h4>
-                        <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">Services</a></li>
-                            <li><a href="#">Terms of service</a></li>
-                            <li><a href="#">Privacy policy</a></li>
-                        </ul>
-                    </div>
+                        <div class="col-lg-3 col-md-6 footer-contact">
+                            <h4>Contact Us</h4>
+                            <p>
+                                A108 Adam Street <br>
+                                New York, NY 535022<br>
+                                United States <br>
+                                <strong>Phone:</strong> +1 5589 55488 55<br>
+                                <strong>Email:</strong> info@example.com<br>
+                            </p>
 
-                    <div class="col-lg-3 col-md-6 footer-contact">
-                        <h4>Contact Us</h4>
-                        <p>
-                            A108 Adam Street <br>
-                            New York, NY 535022<br>
-                            United States <br>
-                            <strong>Phone:</strong> +1 5589 55488 55<br>
-                            <strong>Email:</strong> info@example.com<br>
-                        </p>
+                            <div class="social-links">
+                                <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                                <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                                <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+                                <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+                                <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+                            </div>
 
-                        <div class="social-links">
-                            <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-                            <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-                            <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
-                            <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
-                            <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+                        </div>
+
+                        <div class="col-lg-3 col-md-6 footer-newsletter">
+                            <h4>Our Newsletter</h4>
+                            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna veniam enim veniam illum dolore legam minim quorum culpa amet magna export quem marada parida nodela caramase seza.</p>
+                            <form action="" method="post">
+                                <input type="email" name="email"><input type="submit" value="Subscribe">
+                            </form>
                         </div>
 
                     </div>
-
-                    <div class="col-lg-3 col-md-6 footer-newsletter">
-                        <h4>Our Newsletter</h4>
-                        <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna veniam enim veniam illum dolore legam minim quorum culpa amet magna export quem marada parida nodela caramase seza.</p>
-                        <form action="" method="post">
-                            <input type="email" name="email"><input type="submit" value="Subscribe">
-                        </form>
-                    </div>
-
                 </div>
             </div>
-        </div>
 
-        <div class="container" style="display:none">
-            <div class="copyright">
-                &copy; Copyright <strong>NewBiz</strong>. All Rights Reserved
+            <div class="container" style="display:none">
+                <div class="copyright">
+                    &copy; Copyright <strong>NewBiz</strong>. All Rights Reserved
+                </div>
+                <div class="credits">
+                    <!--
+                      All the links in the footer should remain intact.
+                      You can delete the links only if you purchased the pro version.
+                      Licensing information: https://bootstrapmade.com/license/
+                      Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=NewBiz
+                    -->
+                    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                </div>
             </div>
-            <div class="credits">
-                <!--
-                  All the links in the footer should remain intact.
-                  You can delete the links only if you purchased the pro version.
-                  Licensing information: https://bootstrapmade.com/license/
-                  Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=NewBiz
-                -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-            </div>
-        </div>
-    </footer><!-- #footer -->
+        </footer><!-- #footer -->
 
-    @Scripts.Render("~/bundles/healhConsultJs")
-    @RenderSection("scripts", required: false)
-</body>
+        @Scripts.Render("~/bundles/healhConsultJs")
+        @RenderSection("scripts", required: false)
+        <script>
+        $(function () {
+            if (window.sessionStorage.activeMenuItem) {
+                $("#" + sessionStorage.activeMenuItem).addClass('active');
+            }
+        });
+
+        $('ul#SideList li').click(function () {
+            window.sessionStorage.activeMenuItem = this.id;
+        });
+
+        </script>
+    </body>
 </html>
 

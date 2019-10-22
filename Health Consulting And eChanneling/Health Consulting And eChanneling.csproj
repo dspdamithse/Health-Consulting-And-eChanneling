@@ -195,10 +195,25 @@
     <Content Include="Content\fancybox\fancybox_overlay.png" />
     <Content Include="Content\fancybox\fancybox_sprite%402x.png" />
     <Content Include="Content\fancybox\fancybox_sprite.png" />
+    <Content Include="Content\HealthConsultAllCSS\css\animate.css" />
+    <Content Include="Content\HealthConsultAllCSS\css\main_img.jpg" />
     <Content Include="Content\images\ajax-loader.gif" />
+    <Content Include="Content\images\download.jpg" />
     <Content Include="Content\jquery.fancybox-buttons.css" />
     <Content Include="Content\jquery.fancybox-thumbs.css" />
     <Content Include="Content\jquery.fancybox.css" />
+    <Content Include="Content\MedicalImages\1\IMG-20180825-WA0007.jpg" />
+    <Content Include="Content\MedicalImages\1\IMG-20180901-WA0000.jpg" />
+    <Content Include="Content\MedicalImages\1\IMG-20180915-WA0011.jpg" />
+    <Content Include="Content\MedicalImages\1\IMG-20180917-WA0010.jpg" />
+    <Content Include="Content\MedicalImages\1\IMG-20180925-WA0002.jpg" />
+    <Content Include="Content\MedicalImages\1\IMG-20181006-WA0015.jpg" />
+    <Content Include="Content\MedicalImages\1\IMG-20181008-WA0000.jpg" />
+    <Content Include="Content\MedicalImages\1\IMG-20181019-WA0005.jpg" />
+    <Content Include="Content\MedicalImages\1\IMG-20181019-WA0007.jpg" />
+    <Content Include="Content\MedicalImages\1\IMG-20181019-WA0008.jpg" />
+    <Content Include="Content\MedicalImages\1\IMG-20181024-WA0001.jpg" />
+    <Content Include="Content\MedicalImages\1\IMG-20181025-WA0004.jpg" />
     <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fileman\css\images\animated-overlay.gif" />
@@ -930,18 +945,17 @@
     <Content Include="Views\Cart\AddToCartPartial.cshtml" />
     <Content Include="Views\Shared\_Layout_Register.cshtml" />
     <Content Include="Views\Account\UserNavPartial.cshtml" />
-    <Content Include="Views\Account\UserProfile.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\CreateAccount.cshtml" />
     <Content Include="Views\ImportantNews\NewsList.cshtml" />
     <Content Include="Views\ImportantNews\Index.cshtml" />
     <Content Include="Views\FrontDoctors\Doctors.cshtml" />
     <Content Include="Views\MedicalService\MedicalServiceList.cshtml" />
+    <Content Include="Views\Account\UserProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Administrator\Models\" />
-    <Folder Include="Content\HealthConsultAllCSS\" />
     <Folder Include="Content\MediService\Images\" />
     <Folder Include="Content\News\Images\" />
     <Folder Include="Content\Registration\Doctors\" />

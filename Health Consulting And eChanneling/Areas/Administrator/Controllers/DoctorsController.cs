@@ -9,7 +9,6 @@ using System.Web.Helpers;
 using System.Web.Mvc;
 using PagedList;
 using Health_Consulting_And_eChanneling.Models.ViewModels.Account;
-using System.Linq;
 
 namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
 {
@@ -169,7 +168,7 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
                 img.Save(path4);
             }
 
-            return Redirect("~/Administrator/Doctors/view-all-registed-doctors-list");
+            return Redirect("~/Administrator/Doctors/Doctors");
         }
 
         [HttpGet]
@@ -356,6 +355,7 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
                 listOfDoctorVM = db.Doctors
                                     .ToArray()
                                     .Where(x => catId == null || catId == 0 || x.SpecialistAreaId == catId)
+                                    .OrderByDescending(x=>x.Id)
                                     .Select(x => new DoctorViewModel(x))
                                     .ToList();
                 ViewBag.SpecialistArea = new SelectList(db.DoctorSpecialist.ToList(), "Id", "Name");

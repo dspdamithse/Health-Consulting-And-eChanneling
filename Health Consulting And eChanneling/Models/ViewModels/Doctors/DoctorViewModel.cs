@@ -30,9 +30,13 @@ namespace Health_Consulting_And_eChanneling.Models.ViewModels.Doctors
             UserId = row.UserId;
         }
         public int Id { get; set; }
+        [Required]
         public string FirstName { get; set; }
+        [Required]
         public string LastName { get; set; }
+        [Required]
         public string Username { get; set; }
+        [Required]
         public string EmailAddress { get; set; }
         [Required]
         [Display(Name = "SLMC Reg. No. :")]
@@ -47,6 +51,7 @@ namespace Health_Consulting_And_eChanneling.Models.ViewModels.Doctors
         public string About { get; set; }
         [Display(Name = "Specialist :")]
         public string SpecialistAreaName { get; set; }
+        [Required]
         public int SpecialistAreaId { get; set; }
         [Required]
         public string Password { get; set; }

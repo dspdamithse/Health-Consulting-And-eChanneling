@@ -17,6 +17,8 @@ namespace Health_Consulting_And_eChanneling.Models.ViewModels.Account
             Id = row.Id;
             FirstName = row.FirstName;
             LastName = row.LastName;
+            Username = row.Username;
+            RoleConfirm = row.RoleConfirm;
             EmailAddress = row.EmailAddress;
             ProfileImage = row.ProfileImage;
             Password = row.Password;
@@ -29,6 +31,7 @@ namespace Health_Consulting_And_eChanneling.Models.ViewModels.Account
         [Required]
         [DataType(DataType.EmailAddress)]
         public string EmailAddress { get; set; }
+        public int RoleConfirm { get; set; }
         public String ProfileImage { get; set; }
         [Required]
         public string Username { get; set; }

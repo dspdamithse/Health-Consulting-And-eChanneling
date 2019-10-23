@@ -140,6 +140,7 @@
     <Compile Include="Areas\Administrator\Controllers\NewsController.cs" />
     <Compile Include="Areas\Administrator\Controllers\PagesController.cs" />
     <Compile Include="Areas\Administrator\Controllers\ShopController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\UsersController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\FrontDoctorsController.cs" />
@@ -554,6 +555,8 @@
     <Content Include="Areas\Administrator\Views\MediService\CreateNewService.cshtml" />
     <Content Include="Areas\Administrator\Views\MediService\EditMediService.cshtml" />
     <Content Include="Areas\Administrator\Views\MediService\MediServiceDetails.cshtml" />
+    <Content Include="Areas\Administrator\Views\Users\Users.cshtml" />
+    <Content Include="Areas\Administrator\Views\Users\Details.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor.php" />

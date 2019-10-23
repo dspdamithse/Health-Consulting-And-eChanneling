@@ -1,0 +1,142 @@
+﻿@model Health_Consulting_And_eChanneling.Models.ViewModels.Account.UserProfileViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.FirstName @Model.LastName</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProfileImage, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProfileImage, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProfileImage, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+}
+
+<hr />
+@if (!Model.MedicalImages.Any())
+{
+    <h4>There are no Gallery images</h4>
+}
+<form action="/Administrator/Shop/SaveGalleryImages" method="post" enctype="multipart/form-data" class="dropzone" id="dropzoneForm">
+    <div class="fallback">
+        <input type="file" name="file" multiple />
+        <input type="submit" value="Upload" />
+    </div>
+</form>
+<br />
+<br />
+@foreach (var image in Model.MedicalImages)
+{
+    <div style="display:inline-block">
+        <img style="width: 100px; height: 100px; margin: 10px; border-radius: 10px; box-shadow: 0px 0px 25px;" src="~/Content/MedicalImages/1/@image" />
+        @Html.ActionLink("delete", "DeleteImage", "Shop", new { @class = "deleteimage", data_name = image }, new { @class="btn btn-xs btn-danger"})
+    </div>
+}
+<link href="~/Scripts/dropzone/basic.css" rel="stylesheet" />
+<link href="~/Scripts/dropzone/dropzone.css" rel="stylesheet" />
+@section scripts
+    {
+    <script src="~/Scripts/dropzone/dropzone.js"></script>
+    <script>
+        $(function () {
+
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                     $("img#imgpreview")
+                        .attr("src", e.target.result)
+                        .width(200)
+                        .height(200);
+                 }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#ImageUpload").change(function () {
+                readURL(this);
+            });
+            //////////////////////////////////////////////////////////////////
+            Dropzone.options.dropzoneForm = {
+                acceptedFiles: "image/*",
+                init: function() {
+                    this.on("complete", function (file) {
+                        if (this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
+                            location.reload();
+                            }
+                    });
+
+                    this.on("sending", function (file, xhr, formData) {
+                    formData.append("id", @Model.Id);
+                    });
+                }
+
+            };
+            //////////////////////////////////////////////////////////////////
+
+            $("a.deleteimage").click(function (e) {
+                e.preventDefault();
+
+                if (!confirm("Confirm deletion")) return false;
+
+                var $this = $(this);
+                var url = "/Administrator/shop/DeleteImage";
+                var imageName = $this.data("name");
+
+                $.post(url, { id: @Model.Id, imageName: imageName }, function(data) {
+                    $this.parent().fadeOut("fast");
+            });
+
+    });
+            //////////////////////////////////////////////////////////////////
+        });
+    </script>
+}

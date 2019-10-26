@@ -37,6 +37,7 @@ namespace Health_Consulting_And_eChanneling.Models.ViewModels.Doctors
         [Required]
         public string Username { get; set; }
         [Required]
+        [DataType(DataType.EmailAddress)]
         public string EmailAddress { get; set; }
         [Required]
         [Display(Name = "SLMC Reg. No. :")]

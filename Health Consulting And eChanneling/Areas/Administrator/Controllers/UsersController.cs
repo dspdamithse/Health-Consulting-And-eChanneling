@@ -12,10 +12,9 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
 {
     public class UsersController : Controller
     {
-        // GET: Administrator/Users
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Users");
         }
         public ActionResult Users()
         {
@@ -26,7 +25,6 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
                 userList = db.Users.ToArray().OrderByDescending(x => x.Id).Where(x=>x.RoleConfirm== 0).Where(x=>x.Id != 1).Select(x => new UserViewModel(x)).ToList();
             }
 
-            //Return view with list
             return View(userList);
         }
 
@@ -43,7 +41,7 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
                 }
                 model = new UserProfileViewModel(dto);
 
-                model.MedicalImages = Directory.EnumerateFiles(Server.MapPath("~/Content/MedicalImages/1/"))
+                model.MedicalImages = Directory.EnumerateFiles(Server.MapPath("~/Content/MedicalImages/"+id+"/"))
                                                .Select(fn => Path.GetFileName(fn));
             }
             return View(model);

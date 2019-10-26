@@ -9,9 +9,9 @@ namespace Health_Consulting_And_eChanneling.Controllers
     public class HomeController : Controller
     {
         // GET: Home
-        public ActionResult Index()
+        public ActionResult FooterPartialView()
         {
-            return View();
+            return PartialView();
         }
     }
 }

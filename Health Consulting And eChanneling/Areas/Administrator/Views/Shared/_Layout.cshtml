@@ -3,42 +3,50 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Health Consulting & eChanneling</title>
-    @Styles.Render("~/Content/css")
+    <title>@ViewBag.Title -hConsulting & eChanneling</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+    @Styles.Render("~/Content/healhConsultCSS")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body class="body">
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <header id="header" class="fixed-top">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="/Administrator/dashboard" class="navbar-brand">Dashboard</a>
+
+            <div class="logo float-left">
+                <!-- Uncomment below if you prefer to use an image logo -->
+                <!-- <h1 class="text-light"><a href="#header"><span>NewBiz</span></a></h1> -->
+                <a href="/" class="scrollto">
+                    <img src="~/Content/images/logox.png" />
+                </a>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="/Administrator/Pages">Pages</a></li>
-                    <li><a href="~/Administrator/MediService/MedicalServiceList">Medical Services</a></li>
-                    <li><a href="~/Administrator/News/NewsList">News</a></li>
-                    <li><a href="~/Administrator/Doctors/view-all-registed-doctors-list">Doctors</a></li>
-                    <li><a href="~/Administrator/Users/Users">Users</a></li>
-                    <li><a href="~/Administrator/DoctorSpecialist/all-doctor-specialist-categories">Specialist Cat.</a></li>
-                    <li><a href="/Administrator/Shop/Products">Products</a></li>
+
+            <nav class="main-nav float-right d-none d-lg-block">
+                <ul id="SideList">
+                    <li id="MediService"><a href="~/Administrator/MediService/MedicalServiceList">Medical Services</a></li>
+                    <li id="News"><a href="~/Administrator/News/NewsList">News</a></li>
+                    <li id="Doctors"><a href="~/Administrator/Doctors/Doctors">Doctors</a></li>
+                    <li id="Users"><a href="~/Administrator/Users/Users">Users</a></li>
+                    <li id="PecialList"><a href="~/Administrator/DoctorSpecialist/all-doctor-specialist-categories">Specialist Cat.</a></li>
+                    <li id="Products"><a href="/Administrator/Shop/Products">Products</a></li>
+
+
+
+                    <li class="drop-down">
+                        <a>Account Info</a>
+                        <ul>
+                            <li><a href="#">Drop Down 3</a></li>
+                        </ul>
+                    </li>
                 </ul>
-                <ul class="navbar-right">
-                    <li><a href="/" class="navbar-brand" target="_blank">(Adimin Name)</a></li>
-                </ul>
-            </div>
+            </nav><!-- .main-nav -->
+
         </div>
-    </div>
+    </header><!-- #header -->
     <div class="container">
         <div class="row">
-            <div class="col-md-12" style="margin-top: 50px;">
+            <div class="col-md-12" style="margin-top: 100px;">
                 @RenderBody()
-                <hr />             
+                <hr />
             </div>
             <footer>
                 <p>&copy; @DateTime.Now.Year All Rights Reserved- Health Consulting & e-Channeling</p>
@@ -46,8 +54,20 @@
         </div>
     </div>
 
-    @Scripts.Render("~/bundles/scripts")
+    @Scripts.Render("~/bundles/healhConsultJs")
     @RenderSection("scripts", required: false)
+    <script>
+            $(function () {
+                if (window.sessionStorage.activeMenuItem) {
+                    $("#" + sessionStorage.activeMenuItem).addClass('active');
+                }
+            });
+
+            $('ul#SideList li').click(function () {
+                window.sessionStorage.activeMenuItem = this.id;
+            });
+
+    </script>
 </body>
 </html>
 

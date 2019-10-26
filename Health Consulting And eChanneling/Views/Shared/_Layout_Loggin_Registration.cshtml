@@ -8,7 +8,7 @@
     @Styles.Render("~/Content/healhConsultCSS")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
+<body style="background-image:url('../Images/login_registration_background.jpg'); background-repeat:no-repeat;background-size:cover">
     <header id="header" class="fixed-top">
         <div class="container">
 
@@ -69,13 +69,7 @@
                     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                     {
                         <ul class="nav navbar-nav navbar-right adminarea">
-                            <a class="btn btn-success" href="~/Administrator/dashboard">Dashboard</a>
-                        </ul>
-                    }
-                    @if (Request.IsAuthenticated && User.IsInRole("Doctor"))
-                    {
-                        <ul class="nav navbar-nav navbar-right adminarea">
-                            <a class="btn btn-success" href="~/Administrator/dashboard">Dashboard</a>
+                            <li>@Html.ActionLink("Dashboard", "Index", "Dashboard", new { area = "Administrator" }, null)</li>
                         </ul>
                     }
 

@@ -1531,3 +1531,7 @@ h6 {
     box-shadow: 0px 0px 22px;
     color: black;
 }
+.custom-form-label {
+    color: #6d7311;
+    font-weight: 500;
+}

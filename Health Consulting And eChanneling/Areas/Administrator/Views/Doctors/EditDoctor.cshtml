@@ -5,16 +5,18 @@
     Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Doctor Edit</h2>
+<h2>EditDoctor</h2>
 
 @using (Html.BeginForm("EditDoctor", "Doctors", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
+        <h4>DoctorViewModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.UserId)
 
         <div class="form-group">
             @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -102,7 +104,6 @@
         </div>
     </div>
 }
-
 <div>
     @Html.ActionLink("Back", "view-all-registed-doctors-list")
 </div>
@@ -135,3 +136,4 @@
         CKEDITOR.replace("About");
     </script>
 }
+

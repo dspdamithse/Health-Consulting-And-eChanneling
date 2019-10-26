@@ -8,6 +8,11 @@
 <h2 class="sub_page_title">Doctors</h2>
 @using PagedList.Mvc;
 @using PagedList;
+<style>
+    td>a {
+        margin: 2px 0px;
+    }
+</style>
 
 <select id="SelectDoctor" name="SelectDoctor">
     <option value="0">All</option>
@@ -50,10 +55,6 @@
         <th>
             About
         </th>
-        <th>
-            Specialist
-        </th>
-        <th></th>
     </tr>
 
     @foreach (var item in ViewBag.OnePageOfProducts)
@@ -77,12 +78,9 @@
                 @Html.Raw(item.About)
             </td>
             <td>
-                @item.SpecialistAreaName
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "EditDoctor", new { id = item.Id }) |
-                @Html.ActionLink("Details", "view-doctors-view-details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "DeleteDoctor", new { id = item.Id }, new { @class = "delete" })
+                @Html.ActionLink("Edit", "EditDoctor", new { id = item.Id }, new { @class="btn btn-sm btn-info"})&nbsp;
+                @Html.ActionLink("Info", "view-doctors-view-details", new { id = item.Id }, new { @class="btn btn-sm btn-info"})
+                @Html.ActionLink("Delete", "DeleteDoctor", new { id = item.Id }, new { @class = "delete btn btn-sm btn-danger" })
             </td>
         </tr>
     }

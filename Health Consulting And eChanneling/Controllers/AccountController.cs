@@ -218,6 +218,7 @@ namespace Health_Consulting_And_eChanneling.Controllers
                 model = new UserProfileViewModel(dto);
             }
 
+            //Medical Records
             model.MedicalImages = Directory.EnumerateFiles(Server.MapPath("~/Content/MedicalImages/"+id+"/"))
                                                .Select(fn => Path.GetFileName(fn));
             return View("UserProfile", model);

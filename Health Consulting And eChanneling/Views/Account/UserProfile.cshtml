@@ -25,8 +25,8 @@
         @foreach (var image in Model.MedicalImages)
         {
             <div style="display:inline-block">
-                <a class="fancybox" rel="gallery1" href="~/Content/MedicalImages/1/@image">
-                    <img style="width: 100px; height: 100px; box-shadow: 0px 0px 11px; color: black; margin-bottom: 10px;" src="~/Content/MedicalImages/1/@image" />
+                <a class="fancybox" rel="gallery1" href="~/Content/MedicalImages/@Model.Id/@image">
+                    <img style="width: 100px; height: 100px; box-shadow: 0px 0px 11px; color: black; margin-bottom: 10px;" src="~/Content/MedicalImages/@Model.Id/@image" />
                 </a>
             </div>
         }

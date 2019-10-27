@@ -46,28 +46,29 @@
 <hr />
 @if (!Model.MedicalImages.Any())
 {
-    <h4>There are no Gallery images</h4>
+    <h4>There are no Medical Images</h4>
 }
-<form action="/Administrator/Shop/SaveGalleryImages" method="post" enctype="multipart/form-data" class="dropzone" id="dropzoneForm">
+<form action="/Administrator/Users/SaveMedicalImages/@Model.Id" method="post" enctype="multipart/form-data" class="dropzone" id="dropzoneForm">
     <div class="fallback">
         <input type="file" name="file" multiple />
         <input type="submit" value="Upload" />
     </div>
 </form>
+<a style="float:right; margin:3px 1px" class="btn btn-success btn-xs" href="/Administrator/Users/Details/@Model.Id">Upload Check</a>
 <br />
 <br />
 @foreach (var image in Model.MedicalImages)
 {
     <div style="display:inline-block">
-        <img style="width: 100px; height: 100px; margin: 10px; border-radius: 10px; box-shadow: 0px 0px 25px;" src="~/Content/MedicalImages/1/@image" />
-        @Html.ActionLink("delete", "DeleteImage", "Shop", new { @class = "deleteimage", data_name = image }, new { @class="btn btn-xs btn-danger"})
+        <img style="width: 100px; height: 100px; margin: 10px; border-radius: 10px; box-shadow: 0px 0px 25px;" src="~/Content/MedicalImages/@Model.Id/@image" />
+        @Html.ActionLink("delete", "DeleteImage", "Users", new { @class = "deleteimage", data_name = image })
     </div>
 }
 <link href="~/Scripts/dropzone/basic.css" rel="stylesheet" />
 <link href="~/Scripts/dropzone/dropzone.css" rel="stylesheet" />
 @section scripts
     {
-    <script src="~/Scripts/dropzone/dropzone.js"></script>
+
     <script>
         $(function () {
 
@@ -100,8 +101,9 @@
                     });
 
                     this.on("sending", function (file, xhr, formData) {
-                    formData.append("id", @Model.Id);
+                        formData.append("id", @Model.Id);
                     });
+                    location.reload();
                 }
 
             };
@@ -113,15 +115,16 @@
                 if (!confirm("Confirm deletion")) return false;
 
                 var $this = $(this);
-                var url = "/Administrator/shop/DeleteImage";
+                var url = "~/Administrator/Users/DeleteImage"
                 var imageName = $this.data("name");
 
                 $.post(url, { id: @Model.Id, imageName: imageName }, function(data) {
                     $this.parent().fadeOut("fast");
-            });
+                });
 
-    });
+            });
             //////////////////////////////////////////////////////////////////
         });
     </script>
+    <script src="~/Scripts/dropzone/dropzone.js"></script>
 }

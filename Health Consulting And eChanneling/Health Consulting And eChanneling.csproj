@@ -197,7 +197,15 @@
     <Content Include="Content\fancybox\fancybox_sprite%402x.png" />
     <Content Include="Content\fancybox\fancybox_sprite.png" />
     <Content Include="Content\HealthConsultAllCSS\css\animate.css" />
+    <Content Include="Content\HealthConsultAllCSS\css\home_img2.jpg" />
+    <Content Include="Content\HealthConsultAllCSS\css\home_img3.jpg" />
     <Content Include="Content\HealthConsultAllCSS\css\main_img.jpg" />
+    <Content Include="Content\HealthConsultAllCSS\img\appointment.jpg" />
+    <Content Include="Content\HealthConsultAllCSS\img\doctor.jpg" />
+    <Content Include="Content\HealthConsultAllCSS\img\home-health-care.jpg" />
+    <Content Include="Content\HealthConsultAllCSS\img\medical-services.jpg" />
+    <Content Include="Content\HealthConsultAllCSS\img\medicalhistoryform.jpg" />
+    <Content Include="Content\HealthConsultAllCSS\img\news.jpg" />
     <Content Include="Content\images\ajax-loader.gif" />
     <Content Include="Content\images\download.jpg" />
     <Content Include="Content\jquery.fancybox-buttons.css" />

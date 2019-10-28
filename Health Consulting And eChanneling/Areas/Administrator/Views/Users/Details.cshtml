@@ -115,7 +115,7 @@
                 if (!confirm("Confirm deletion")) return false;
 
                 var $this = $(this);
-                var url = "~/Administrator/Users/DeleteImage"
+                var url = "/Administrator/Users/DeleteImage"
                 var imageName = $this.data("name");
 
                 $.post(url, { id: @Model.Id, imageName: imageName }, function(data) {

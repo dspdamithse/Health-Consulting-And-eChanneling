@@ -644,19 +644,19 @@ h6 {
 --------------------------------*/
 
 #services {
-  padding: 60px 0 40px 0;
+  padding: 60px 0 0 0;
   box-shadow: inset 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
 }
 
 #services .box {
-  padding: 30px;
-  position: relative;
-  overflow: hidden;
-  border-radius: 10px;
-  margin: 0 10px 40px 10px;
-  background: #fff;
-  box-shadow: 0 10px 29px 0 rgba(68, 88, 144, 0.1);
-  transition: all 0.3s ease-in-out;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    margin: 0 10px 40px 10px;
+    background: #243116;
+    box-shadow: 0 10px 29px 0 rgba(68, 88, 144, 0.1);
+    transition: all 0.3s ease-in-out;
 }
 
 #services .box:hover {
@@ -773,9 +773,9 @@ h6 {
   color: #cce5ff;
 }
 .sub_page_title {
-    color: #99ef98;
+    color: #000000;
     font-weight: 600;
-    padding: 10px 5px;
+    padding: 10px 9px;
     box-shadow: 0px 5px 2px;
 }
 .SelectDoctor {
@@ -1535,3 +1535,110 @@ h6 {
     color: #6d7311;
     font-weight: 500;
 }
+#main-slider {
+    background-image: url(../images/slider-bg.jpg);
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    padding: 200px 0;
+    color: #fff;
+}
+.box {
+    padding: 50px 30px;
+    background: #fff;
+    border-bottom: 1px solid #e9e9e9;
+    position: relative;
+}
+.box.first {
+    margin-top: -40px;
+    border-radius: 5px 5px 0 0;
+}
+
+.member {
+    margin: 0 50px;
+    text-align: center;
+}
+#services .box {
+    padding-bottom: 0;
+}
+#services .row > div {
+    margin-bottom: 50px;
+}
+.center {
+    text-align: center;
+}
+
+
+.icon-md {
+    font-size: 24px;
+    height: 100px;
+    width: 100px;
+    line-height: 100px;
+    color: #000;
+    margin-right: 10px;
+    background-color: rgba(0, 0, 0, 0.4);
+    text-align: center;
+    display: inline-block;
+    border-radius: 100%;
+    margin-bottom: 10px;
+    box-shadow: 0px 0px 10px;
+}
+.icon-md:hover {
+    height: 110px;
+    width: 110px;
+    color: blueviolet;
+    box-shadow: 3px 3px 20px;
+}
+.icon-color1 {
+    background-color: #e74c3c;
+}
+.icon-color2 {
+    background-color: #2ecc71;
+}
+.gap {
+    margin-bottom: 50px;
+}
+
+.carousel.scale .left-arrow, .carousel.scale .right-arrow {
+    top: 30%;
+    position: absolute;
+}
+.carousel.scale .left-arrow {
+    left: -10px;
+}
+.carousel.scale .left-arrow, .carousel.scale .right-arrow {
+    top: 30%;
+    position: absolute;
+}
+.carousel.scale .right-arrow {
+    right: -10px;
+}
+.home_service_h4 {
+    color: #179e79;
+    font-weight: 500;
+    font-size: 25px;
+    text-shadow: 1px 1px 1px;
+}
+.home_service_h4:hover {
+    color: #2be263;
+    font-weight: 500;
+    font-size: 27px;
+    text-shadow: 1px 1px 3px;
+}
+.service_home_p {
+    color: white;
+    font-size: 18px;
+}
+.service_home_p:hover{
+    color:aqua;
+    font-size: 18px;
+}
+
+@media (min-width: 1200px){ 
+    .service_container {
+    max-width: 1329px;
+    }
+}
+
+

@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UsersController : Controller
     {
         public ActionResult Index()
@@ -67,7 +68,6 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
                 }
             }   
         }
-
         public void DeleteImage(int id, string imageName)
         {
             string fullpath1 = Request.MapPath("~/Content/MedicalImages" + id.ToString() +"/"+ imageName);

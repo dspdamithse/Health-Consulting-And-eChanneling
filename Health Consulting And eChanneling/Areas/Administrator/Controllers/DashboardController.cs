@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class DashboardController : Controller
     {
         // GET: Administrator/Dashboard

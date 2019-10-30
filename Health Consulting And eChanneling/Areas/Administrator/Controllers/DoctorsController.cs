@@ -12,6 +12,7 @@ using Health_Consulting_And_eChanneling.Models.ViewModels.Account;
 
 namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class DoctorsController : Controller
     {
         [HttpGet]

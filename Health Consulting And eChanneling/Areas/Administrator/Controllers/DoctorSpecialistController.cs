@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class DoctorSpecialistController : Controller
     {
         // GET: Administrator/DoctorSpecialist

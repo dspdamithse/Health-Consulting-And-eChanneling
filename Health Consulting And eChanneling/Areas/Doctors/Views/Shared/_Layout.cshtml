@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title -hConsulting & eChanneling</title>
+    <title>@ViewBag.Title -Doctors View</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
     @Styles.Render("~/Content/healhConsultCSS")
     @Scripts.Render("~/bundles/modernizr")
@@ -22,33 +22,14 @@
 
             <nav class="main-nav float-right d-none d-lg-block">
                 <ul id="SideList">
-                    @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                    <li id="appointment"><a href="~/medical-services/all-services">Appointment</a></li>
+                    <li id="Users"><a href="~/Administrator/Users/Users">Users</a></li>
+                    <li id="Users"><a href="~/Administrator/Users/Users">Doctor Profile</a></li>
+                    @if (Request.IsAuthenticated)
                     {
-                        <li id="MediService"><a href="~/Administrator/MediService/MedicalServiceList">Medical Services</a></li>
-                        <li id="News"><a href="~/Administrator/News/NewsList">News</a></li>
-                        <li id="Doctors"><a href="~/Administrator/Doctors/Doctors">Doctors</a></li>
-                        <li id="Users"><a href="~/Administrator/Users/Users">Users</a></li>
-                        <li id="PecialList"><a href="~/Administrator/DoctorSpecialist/all-doctor-specialist-categories">Specialist Cat.</a></li>
-                        <li id="Products"><a href="/Administrator/Shop/Products">Products</a></li>
-                    }
-                    @if (Request.IsAuthenticated && User.IsInRole("Doctor"))
-                    {
-                        <li id="Users"><a href="~/Administrator/Users/Users">Users</a></li>
+                        <li><a href="/account/logout">Logout</a></li>
                     }
 
-
-
-
-                    <li class="drop-down">
-                        <a>Account Info</a>
-                        <ul>
-                            @if (Request.IsAuthenticated)
-                            {
-                                <li><a href="/account/logout">Logout</a></li>
-                            }
-                            <li><a href="#">Drop Down 3</a></li>
-                        </ul>
-                    </li>
                 </ul>
             </nav><!-- .main-nav -->
 

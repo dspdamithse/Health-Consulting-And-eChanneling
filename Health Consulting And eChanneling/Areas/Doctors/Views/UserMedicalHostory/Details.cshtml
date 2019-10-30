@@ -1,0 +1,44 @@
+﻿@model Health_Consulting_And_eChanneling.Models.ViewModels.Account.UserProfileViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Doctors/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <div class="col-xs-12 col-md=4">
+            <img style="border-radius: 50%; width: 200px; height: 200px; box-shadow: 0px 0px 22px;" src="~/Content/Registration/Users/@Model.Id/Thumbs/@Model.ProfileImage" />
+        </div>
+
+
+    </dl>
+</div>
+<div class="row">
+    <h4 class="sub_page_title">Medical Records</h4>
+    <div class="col-xs-12 fancyboxdiv">
+        <br /><br />
+        @foreach (var image in Model.MedicalImages)
+        {
+            <div style="display:inline-block">
+                <a class="fancybox" rel="gallery1" href="~/Content/MedicalImages/@Model.Id/@image">
+                    <img style="width: 100px; height: 100px; box-shadow: 0px 0px 11px; color: black; margin-bottom: 10px;" src="~/Content/MedicalImages/@Model.Id/@image" />
+                </a>
+            </div>
+        }
+    </div>
+</div>
+<link href="~/Content/jquery.fancybox.css" rel="stylesheet" />
+@section scripts
+{
+    <script src="~/Scripts/jquery.fancybox.js"></script>
+    <script>
+        $(function () {
+            $(".fancybox").fancybox();
+        });
+    </script>
+}

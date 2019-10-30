@@ -141,6 +141,8 @@
     <Compile Include="Areas\Administrator\Controllers\PagesController.cs" />
     <Compile Include="Areas\Administrator\Controllers\ShopController.cs" />
     <Compile Include="Areas\Administrator\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Doctors\Controllers\UserMedicalHostoryController.cs" />
+    <Compile Include="Areas\Doctors\DoctorsAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\FrontDoctorsController.cs" />
@@ -569,6 +571,11 @@
     <Content Include="Areas\Administrator\Views\Users\Details.cshtml" />
     <Content Include="Areas\Administrator\Views\Shared\_Layout - Copy.cshtml" />
     <Content Include="Areas\Administrator\Views\Doctors\EditDoctor.cshtml" />
+    <Content Include="Areas\Doctors\Views\web.config" />
+    <Content Include="Areas\Doctors\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Doctors\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Doctors\Views\UserMedicalHostory\Users.cshtml" />
+    <Content Include="Areas\Doctors\Views\UserMedicalHostory\Details.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor.php" />
@@ -972,6 +979,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Administrator\Models\" />
+    <Folder Include="Areas\Doctors\Models\" />
     <Folder Include="Content\MediService\Images\" />
     <Folder Include="Content\News\Images\" />
     <Folder Include="Content\Registration\Doctors\" />

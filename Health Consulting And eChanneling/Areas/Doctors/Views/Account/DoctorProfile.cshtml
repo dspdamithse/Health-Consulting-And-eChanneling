@@ -1,0 +1,78 @@
+﻿@model Health_Consulting_And_eChanneling.Models.ViewModels.Doctors.DoctorViewModel
+
+@{
+    ViewBag.Title = "Doctor Profile";
+    Layout = "~/Areas/Doctors/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Doctor Profile</h2>
+
+<dl class="dl-horizontal">
+    <dt style="float:left">
+        Name
+    </dt>
+
+    <dd style="margin-left: 200px;">
+        @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)
+    </dd>
+    <br />
+    <dt style="float:left">
+        Image
+    </dt>
+
+    <dd style="margin-left: 200px;">
+        <img style="border: 1px solid black; border-radius: 50%;" src="~/Content/Registration/Doctors/@Model.Id/Thumbs/@Model.Image" alt="Alternate Text" />
+    </dd><br />
+
+    <dt style="float:left">
+        @Html.DisplayNameFor(model => model.Username)
+    </dt>
+
+    <dd style="margin-left: 200px;">
+        @Html.DisplayFor(model => model.Username)
+    </dd><br />
+
+    <dt style="float:left">
+        Email
+    </dt>
+
+    <dd style="margin-left: 200px;">
+        @Html.DisplayFor(model => model.EmailAddress)
+    </dd> <br />
+
+    <dt style="float:left">
+        SLMC Registration No
+    </dt>
+
+    <dd style="margin-left: 200px;">
+        @Html.DisplayFor(model => model.SLMC_Reg_No)
+    </dd><br />
+
+    <dt style="float:left">
+        Phone
+    </dt>
+
+    <dd style="margin-left: 200px;">
+        @Html.DisplayFor(model => model.ContactNumber)
+    </dd><br />
+
+    <dt style="float:left">
+        About Doctor
+    </dt>
+
+    <dd style="margin-left: 200px;">
+        @Html.Raw(Model.About)
+    </dd><br />
+
+    <dt style="float:left">
+        Specialist
+    </dt>
+
+    <dd style="margin-left: 200px;">
+        @Html.DisplayFor(model => model.SpecialistAreaName)
+    </dd>
+</dl>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

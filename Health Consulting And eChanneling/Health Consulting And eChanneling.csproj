@@ -141,6 +141,7 @@
     <Compile Include="Areas\Administrator\Controllers\PagesController.cs" />
     <Compile Include="Areas\Administrator\Controllers\ShopController.cs" />
     <Compile Include="Areas\Administrator\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Doctors\Controllers\AccountController.cs" />
     <Compile Include="Areas\Doctors\Controllers\UserMedicalHostoryController.cs" />
     <Compile Include="Areas\Doctors\DoctorsAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -512,6 +513,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\doctor_view_backgrond.jpg" />
+    <Content Include="Images\search-container-img.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Administrator\Views\web.config" />
@@ -576,6 +579,7 @@
     <Content Include="Areas\Doctors\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Doctors\Views\UserMedicalHostory\Users.cshtml" />
     <Content Include="Areas\Doctors\Views\UserMedicalHostory\Details.cshtml" />
+    <Content Include="Areas\Doctors\Views\Account\DoctorProfile.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor.php" />

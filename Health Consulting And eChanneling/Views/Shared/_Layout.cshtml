@@ -27,58 +27,48 @@
                     <li id="service"><a href="~/medical-services/all-services">Medical Service</a></li>
                     <li id="appointment"><a href="~/medical-services/all-services">Appointment</a></li>
                     <li id="news"><a href="~/important-news/all-news-articals">News</a></li>
-
-
-
-                    <li class="drop-down">
-                        <a>Account Info</a>
-                        <ul>
-                            <li>
-                                @if (Request.IsAuthenticated && (User.IsInRole("User") || User.IsInRole("Doctor")))
-                                {
-                                    if (ViewBag.Title == "User Profile")
-                                    {
-                                    <li class="active">@Html.Action("UserNavPartial", "Account")</li>
-                                }
-                                else
-                                {
-                                    <li>@Html.Action("UserNavPartial", "Account")</li>
-                                }
-                            }
-                        </li>
-                        @if (Request.IsAuthenticated)
+                    @if (Request.IsAuthenticated && User.IsInRole("User"))
+                    {
+                        if (ViewBag.Title == "User Profile")
                         {
-                            <li><a href="/account/logout">Logout</a></li>
+                            <li class="active">@Html.Action("UserNavPartial", "Account")</li>
                         }
                         else
                         {
-                            if (ViewBag.Title == "Login")
-                            {
-                                <li class="active"><a href="/account/login">Login</a></li>
-                            }
-                            else
-                            {
-                                <li><a href="/account/login">Login</a></li>
-                            }
-
+                            <li>@Html.Action("UserNavPartial", "Account")</li>
                         }
-                        <li><a href="#">Drop Down 3</a></li>
-                    </ul>
-                    </li>
-                    </ul>
+                    }
+
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li><a href="/account/logout">Logout</a></li>
+                    }
+                    else
+                    {
+                        if (ViewBag.Title == "Login")
+                        {
+                            <li class="active"><a href="/account/login">Login</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="/account/login">Login</a></li>
+                        }
+
+                    }
+
                     @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                     {
-                        <ul class="nav navbar-nav navbar-right adminarea">
-                            <a class="btn btn-success" href="~/Administrator/dashboard">Dashboard</a>
-                        </ul>
+                        <li>
+                        <a class="btn btn-xs btn-success" href="~/Administrator/dashboard">Dashboard</a>
+                        </li>
                     }
                     @if (Request.IsAuthenticated && User.IsInRole("Doctor"))
                     {
-                        <ul class="nav navbar-nav navbar-right adminarea">
-                            <a class="btn btn-success" href="~/Administrator/dashboard">Dashboard</a>
-                        </ul>
+                        <li>
+                            <a class="btn btn-xs btn-success" href="~/Administrator/dashboard">Doctor View</a>
+                        </li>
                     }
-
+                </ul>
                 </nav><!-- .main-nav -->
 
             </div>

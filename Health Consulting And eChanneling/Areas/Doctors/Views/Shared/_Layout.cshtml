@@ -8,8 +8,8 @@
     @Styles.Render("~/Content/healhConsultCSS")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body class="body">
-    <header id="header" class="fixed-top">
+<body class="body" style="background-image:url('../../../../Images/search-container-img.jpg'); background-repeat:no-repeat;background-size:cover">
+    <header id="header" class="fixed-top" style=" background: #c7ad28;">
         <div class="container">
 
             <div class="logo float-left">
@@ -23,10 +23,10 @@
             <nav class="main-nav float-right d-none d-lg-block">
                 <ul id="SideList">
                     <li id="appointment"><a href="~/medical-services/all-services">Appointment</a></li>
-                    <li id="Users"><a href="~/Administrator/Users/Users">Users</a></li>
-                    <li id="Users"><a href="~/Administrator/Users/Users">Doctor Profile</a></li>
-                    @if (Request.IsAuthenticated)
+                    <li id="Users"><a href="~/Doctors/UserMedicalHostory/Users">Users</a></li>
+                    @if (Request.IsAuthenticated && User.IsInRole("Doctor"))
                     {
+                        <li id="Users"><a href="~/Doctors/Account/doctor-profile">Doctor Profile</a></li>
                         <li><a href="/account/logout">Logout</a></li>
                     }
 

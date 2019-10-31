@@ -22,11 +22,11 @@
 
             <nav class="main-nav float-right d-none d-lg-block">
                 <ul id="SideList">
-                    <li id="appointment"><a href="~/medical-services/all-services">Appointment</a></li>
+                    <li id="appointment"><a href="~/Doctors/UserMedicalHostory/Users">Appointment</a></li>
                     <li id="Users"><a href="~/Doctors/UserMedicalHostory/Users">Users</a></li>
                     @if (Request.IsAuthenticated && User.IsInRole("Doctor"))
                     {
-                        <li id="Users"><a href="~/Doctors/Account/doctor-profile">Doctor Profile</a></li>
+                        <li id="Users_profile"><a href="~/Doctors/Account/doctor-profile">Doctor Profile</a></li>
                         <li><a href="/account/logout">Logout</a></li>
                     }
 

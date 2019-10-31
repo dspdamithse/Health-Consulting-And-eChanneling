@@ -120,11 +120,14 @@ namespace Health_Consulting_And_eChanneling.Controllers
 
             }
             TempData["SM"] = "Successfully Registered";
-            var originalDirectory = new DirectoryInfo(string.Format("{0}Content\\Registration", Server.MapPath(@"\")));
+            var originalDirectory = new DirectoryInfo(string.Format("{0}Content", Server.MapPath(@"\")));
 
-            string pathString1 = Path.Combine(originalDirectory.ToString(), "Users");
-            string pathString2 = Path.Combine(originalDirectory.ToString(), "Users\\" + userid.ToString());
-            string pathString3 = Path.Combine(originalDirectory.ToString(), "Users\\" + userid.ToString() + "\\Thumbs");
+            string pathString1 = Path.Combine(originalDirectory.ToString(), "Registration\\Users");
+            string pathString2 = Path.Combine(originalDirectory.ToString(), "Registration\\Users\\" + userid.ToString());
+            string pathString3 = Path.Combine(originalDirectory.ToString(), "Registration\\Users\\" + userid.ToString() + "\\Thumbs");
+
+
+            string pathString4 = Path.Combine(originalDirectory.ToString(), "MedicalImages\\" + userid.ToString());
 
             if (!Directory.Exists(pathString1))
                 Directory.CreateDirectory(pathString1);
@@ -132,6 +135,8 @@ namespace Health_Consulting_And_eChanneling.Controllers
                 Directory.CreateDirectory(pathString2);
             if (!Directory.Exists(pathString3))
                 Directory.CreateDirectory(pathString3);
+            if (!Directory.Exists(pathString4))
+                Directory.CreateDirectory(pathString4);
 
             if (file != null && file.ContentLength > 0)
             {

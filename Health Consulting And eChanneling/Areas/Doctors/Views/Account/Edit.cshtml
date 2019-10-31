@@ -1,32 +1,30 @@
 ﻿@model Health_Consulting_And_eChanneling.Models.ViewModels.Doctors.DoctorViewModel
 
 @{
-    ViewBag.Title = "EditDoctor";
-    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Doctors/Views/Shared/_Layout.cshtml";
 }
 
-<h2>EditDoctor</h2>
+<h2>Edit Doctor Profile</h2>
 
-@using (Html.BeginForm("EditDoctor", "Doctors", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Edit", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
         @Html.HiddenFor(model => model.UserId)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="FirstName">First Name</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="LastName">Last Name</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
@@ -34,15 +32,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="EmailAddress">Email</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.EmailAddress, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
@@ -50,7 +40,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.SLMC_Reg_No, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="SLMC Reg No">SLMC Reg. No. :</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.SLMC_Reg_No, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.SLMC_Reg_No, "", new { @class = "text-danger" })
@@ -58,7 +48,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ContactNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="ContactNumber">Contact Number :</label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.ContactNumber, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.ContactNumber, "", new { @class = "text-danger" })
@@ -66,7 +56,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2 e-medi-label" })
+            <label class="control-label col-md-2 e-medi-label" for="Image">Profile Image</label>
             <div class="col-md-10">
                 <div class="col-md-10">
                     <img src="~/Content/Registration/Doctors/@Model.Id/Thumbs/@Model.Image" alt="@Model.Image" />
@@ -98,14 +88,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Update" class="btn btn-info" />
             </div>
         </div>
     </div>
 }
-<div>
-    @Html.ActionLink("Back", "view-all-registed-doctors-list")
-</div>
+
 @section scripts
     {
     <script>
@@ -135,4 +123,3 @@
         CKEDITOR.replace("About");
     </script>
 }
-

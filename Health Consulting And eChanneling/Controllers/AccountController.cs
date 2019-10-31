@@ -294,7 +294,7 @@ namespace Health_Consulting_And_eChanneling.Controllers
 
             using (Db db = new Db())
             {
-                if (db.Doctors.Where(x => x.Id != id).Any(x => x.Username == model.Username))
+                if (db.Users.Where(x => x.Id != id).Any(x => x.Username == model.Username))
                 {
                     ModelState.AddModelError("", "Username Alredy exist");
                     return View(model);
@@ -306,15 +306,100 @@ namespace Health_Consulting_And_eChanneling.Controllers
                 udto.FirstName = model.FirstName;
                 udto.LastName = model.LastName;
                 udto.EmailAddress = model.EmailAddress;
-                udto.Username = model.Username;
-                udto.RoleConfirm = 1;
 
                 db.SaveChanges();
             }
 
-            TempData["SM"] = "Successfully Updated the User Profile";
+            TempData["SM"] = "Successfully Updated the profile";
 
-            return RedirectToAction("user-profile");
+            if (file != null && file.ContentLength > 0)
+            {
+                string ext = file.ContentType.ToLower();
+                if (ext != "image/jpg" && ext != "image/jpeg" && ext != "image/pjpeg" && ext != "image/gif" && ext != "image/x-png" && ext != "image/png")
+                {
+                    using (Db db = new Db())
+                    {
+                        ModelState.AddModelError("", "Image was Not Uploaded- Image format is wrong");
+                        return View(model);
+                    }
+                }
+                var originalDirectory = new DirectoryInfo(string.Format("{0}Content\\Registration", Server.MapPath(@"\")));
+
+                string pathString1 = Path.Combine(originalDirectory.ToString(), "Users\\" + id.ToString());
+                string pathString2 = Path.Combine(originalDirectory.ToString(), "Users\\" + id.ToString() + "\\Thumbs");
+
+                DirectoryInfo dir1 = new DirectoryInfo(pathString1);
+                DirectoryInfo dir2 = new DirectoryInfo(pathString2);
+
+
+                foreach (FileInfo file1 in dir1.GetFiles())
+                    file1.Delete();
+                foreach (FileInfo file2 in dir2.GetFiles())
+                    file2.Delete();
+
+
+                string imageName = file.FileName;
+                using (Db db = new Db())
+                {
+                    UserDTO udto = db.Users.Find(id);
+                    udto.ProfileImage = imageName;
+
+                    db.SaveChanges();
+                }
+                var path = string.Format("{0}\\{1}", pathString1, imageName);
+                var path2 = string.Format("{0}\\{1}", pathString2, imageName);
+
+                file.SaveAs(path);
+
+                WebImage img = new WebImage(file.InputStream);
+                img.Resize(200, 200);
+                img.Save(path2);
+            }
+            return RedirectToAction("Login");
+        }
+
+        [HttpGet]
+        public ActionResult ResetPassword(int id)
+        {
+            UserViewModel model;
+            using (Db db = new Db())
+            {
+                UserDTO dto = db.Users.Find(id);
+                if (dto == null)
+                {
+                    return Content("My Account is not available");
+                }
+
+                model = new UserViewModel(dto);
+            }
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ResetPassword(UserViewModel model)
+        {
+            if (model.Password.Length > 0)
+            {
+                if (!model.Password.Equals(model.ConfirmPassword))
+                {
+                    ModelState.AddModelError("", "Password and Confirm password are not match");
+                    return RedirectToAction("ResetPassword", model);
+                }
+            }
+
+            int id = model.Id;
+
+
+            using (Db db = new Db())
+            {
+                UserDTO udto = db.Users.Find(id);
+                udto.Password = model.Password;
+
+                db.SaveChanges();
+            }
+
+            TempData["SM"] = "Successfully Updated the password";
+
+            return RedirectToAction("Login");
         }
 
 

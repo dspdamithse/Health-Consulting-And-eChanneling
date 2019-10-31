@@ -26,35 +26,43 @@
             }
         </select>
         <br /><br />
-        <table class="table">
+              <table class="table table-striped">
+                  <tr>
+                      <th>Image</th>
+                      <th>Name</th>
+                      <th>SLMC Reg. No.</th>
+                      <th>Description</th>
+                      <th>Specialist for</th>
+                  </tr>
+                  @foreach (var item in ViewBag.OnePageOfProducts)
+                  {
 
-            @foreach (var item in ViewBag.OnePageOfProducts)
-            {
-                <tr>
-                    <td>
-                        <a href="~/">
-                            <img style="    border-radius: 23px; color: black; box-shadow: 0px 0px 6px;" src="~/Content/Registration/Doctors/@item.Id/Thumbs/@item.Image" width="200" height="200" />
-                        </a>
-                    </td>
-                    <td>
-                        <br /><br /><br />
-                        @item.FirstName @item.LastName
-                    </td>
-                    <td>
-                        <br /><br /><br />
-                        @item.SLMC_Reg_No
-                    </td>
-                    <td>
-                        @Html.Raw(item.About)
-                    </td>
-                    <td>
-                        <br /><br /><br />
-                        @item.SpecialistAreaName
-                    </td>
-                </tr>
-            }
+                      <tr>
+                          <td>
+                              <a href="~/">
+                                  <img style="    border-radius: 23px; color: black; box-shadow: 0px 0px 6px;" src="~/Content/Registration/Doctors/@item.Id/Thumbs/@item.Image" width="200" height="200" />
+                              </a>
+                          </td>
+                          <td>
+                              <br /><br /><br />
+                              @item.FirstName @item.LastName
+                          </td>
+                          <td>
+                              <br /><br /><br />
+                              @item.SLMC_Reg_No
+                          </td>
+                          <td>
+                              <br /><br /><br />
+                              @Html.Raw(item.About)
+                          </td>
+                          <td>
+                              <br /><br /><br />
+                              @item.SpecialistAreaName
+                          </td>
+                      </tr>
+                  }
 
-        </table>
+              </table>
 
 
 

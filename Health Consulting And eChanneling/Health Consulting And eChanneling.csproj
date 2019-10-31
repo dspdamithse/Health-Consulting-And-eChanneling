@@ -993,6 +993,7 @@
     <Content Include="Views\Shared\_Layout_Loggin_Registration.cshtml" />
     <Content Include="Views\Home\FooterPartialView.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

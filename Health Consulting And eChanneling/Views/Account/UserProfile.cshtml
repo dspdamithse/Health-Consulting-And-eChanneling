@@ -15,7 +15,7 @@
             <img style="border-radius: 50%; width: 200px; height: 200px; box-shadow: 0px 0px 22px;" src="~/Content/Registration/Users/@Model.Id/Thumbs/@Model.ProfileImage" />
         </div><br /><br />
         @Html.ActionLink("Change Profile Info", "Edit", new { id = Model.Id }, new { @class="btn btn-xs btn-info"}) |
-        @Html.ActionLink("Reset Password", "Edit", new { id = Model.Id }, new { @class="btn btn-xs btn-info"})
+        @Html.ActionLink("Reset Password", "ResetPassword", new { id = Model.Id }, new { @class="btn btn-xs btn-info"})
     </dl>
 </div>
 <div class="row">

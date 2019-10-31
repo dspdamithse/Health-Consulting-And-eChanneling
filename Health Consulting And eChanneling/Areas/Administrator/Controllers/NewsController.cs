@@ -236,5 +236,17 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
             }
             return View(model);
         }
+
+        public ActionResult Delete(int id)
+        {
+            using (Db db = new Db())
+            {
+                NewsDTO dto = db.News.Find(id);
+                db.News.Remove(dto);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("NewsList");
+        }
     }
 }

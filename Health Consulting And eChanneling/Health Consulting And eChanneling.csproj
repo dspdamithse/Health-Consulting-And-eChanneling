@@ -205,9 +205,17 @@
     <Content Include="Content\HealthConsultAllCSS\css\main_img.jpg" />
     <Content Include="Content\HealthConsultAllCSS\img\appointment.jpg" />
     <Content Include="Content\HealthConsultAllCSS\img\doctor.jpg" />
+    <Content Include="Content\HealthConsultAllCSS\img\doctor_appointment.jpg" />
+    <Content Include="Content\HealthConsultAllCSS\img\doctor_registration_img.jpg" />
+    <Content Include="Content\HealthConsultAllCSS\img\doctor_registration_img_one.jpg" />
+    <Content Include="Content\HealthConsultAllCSS\img\doctor_rspecialization_img_one.jpg" />
+    <Content Include="Content\HealthConsultAllCSS\img\health_consulting_one.jpg" />
+    <Content Include="Content\HealthConsultAllCSS\img\health_news.jpg" />
     <Content Include="Content\HealthConsultAllCSS\img\home-health-care.jpg" />
     <Content Include="Content\HealthConsultAllCSS\img\medical-services.jpg" />
     <Content Include="Content\HealthConsultAllCSS\img\medicalhistoryform.jpg" />
+    <Content Include="Content\HealthConsultAllCSS\img\medical_records.jpg" />
+    <Content Include="Content\HealthConsultAllCSS\img\medical_services.jpg" />
     <Content Include="Content\HealthConsultAllCSS\img\news.jpg" />
     <Content Include="Content\images\ajax-loader.gif" />
     <Content Include="Content\images\download.jpg" />
@@ -514,6 +522,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\doctor_view_backgrond.jpg" />
+    <Content Include="Images\login_register_background_img_change.jpg" />
     <Content Include="Images\search-container-img.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

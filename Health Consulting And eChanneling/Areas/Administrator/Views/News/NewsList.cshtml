@@ -25,13 +25,10 @@ else
     <table class="table">
         <tr>
             <th>
-                Title
-            </th>
-            <th>
-                Slug
-            </th>
-            <th>
                 Thumb Image
+            </th>
+            <th>
+                Title
             </th>
             <th>
                 Content
@@ -43,23 +40,40 @@ else
         {
             <tr style="box-shadow:2px 5px 9px;">
                 <td>
+                    <img style="border-radius: 50%;" src="~/Content/News/Images/@item.Id/Thumbs/@item.Image" alt="@item.Image" />
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Slug)
                 </td>
                 <td>
-                    <img style="border-radius: 50%;" src="~/Content/News/Images/@item.Id/Thumbs/@item.Image" alt="@item.Image" />
-                </td>
-                <td>
                     @Html.Raw(item.Content)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "EditNews", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    <a class="btn btn-xs btn-info" href="/Administrator/News/EditNews/@item.Id" style="margin-bottom: 2px;">Edit</a> |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-xs btn-danger delete" })
                 </td>
-            </tr>           
+            </tr>
+
         }
     </table>
 
+}
+@section scripts
+    {
+
+    <script>
+        $(function () {
+            $("a.delete").click(function () {
+                if (!confirm("Are you sure you need to delete this"))
+                    return false;
+            });
+            ////////////////////////////////////////////////////////////////////////
+
+            ////////////////////////////////////////////////////////////////////////
+
+        });
+    </script>
 }

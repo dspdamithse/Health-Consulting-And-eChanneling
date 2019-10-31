@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace Health_Consulting_And_eChanneling.Areas.Doctors.Controllers
 {
+    [Authorize(Roles = "Doctor")]
     public class AccountController : Controller
     {
         public ActionResult Index()
@@ -49,23 +50,6 @@ namespace Health_Consulting_And_eChanneling.Areas.Doctors.Controllers
                 
                 model = new DoctorViewModel(dto);
                 model.SpecialistArea = new SelectList(db.DoctorSpecialist.ToList(), "Id", "Name");
-            }
-            return View(model);
-        }
-
-        [HttpGet]
-        public ActionResult ResetPassword(int id)
-        {
-            DoctorViewModel model;
-            using (Db db = new Db())
-            {
-                DoctorDTO dto = db.Doctors.Find(id);
-                if (dto == null)
-                {
-                    return Content("Doctor is not available");
-                }
-                
-                model = new DoctorViewModel(dto);
             }
             return View(model);
         }
@@ -180,6 +164,58 @@ namespace Health_Consulting_And_eChanneling.Areas.Doctors.Controllers
                 img.Save(path2);
                 img.Save(path4);
             }
+            return RedirectToAction("doctor-profile");
+        }
+
+        [HttpGet]
+        public ActionResult ResetPassword(int id)
+        {
+            DoctorViewModel model;
+            using (Db db = new Db())
+            {
+                DoctorDTO dto = db.Doctors.Find(id);
+                if (dto == null)
+                {
+                    return Content("Doctor is not available");
+                }
+
+                model = new DoctorViewModel(dto);
+            }
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ResetPassword(DoctorViewModel model)
+        {
+            if (model.Password.Length>0)
+            {
+                if (!model.Password.Equals(model.ConfirmPassword))
+                {
+                    ModelState.AddModelError("", "Password and Confirm password are not match");
+                    return RedirectToAction("ResetPassword", model);
+                }
+            }
+            
+            int id = model.Id;
+            int userid = model.UserId;
+
+
+            using (Db db = new Db())
+            {
+                UserDTO udto = db.Users.Find(userid);
+                udto.Password = model.Password;
+
+                db.SaveChanges();
+            }
+            using (Db db = new Db())
+            {
+                DoctorDTO ddto = db.Doctors.Find(id);
+                ddto.Password = model.Password;
+
+                db.SaveChanges();
+            }
+
+            TempData["SM"] = "Successfully Updated the password";
+
             return RedirectToAction("doctor-profile");
         }
     }

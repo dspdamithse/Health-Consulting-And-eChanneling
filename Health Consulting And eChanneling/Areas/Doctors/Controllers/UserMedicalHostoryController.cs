@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace Health_Consulting_And_eChanneling.Areas.Doctors.Controllers
 {
+    [Authorize(Roles = "Doctor")]
     public class UserMedicalHostoryController : Controller
     {
         // GET: Doctors/UserMedicalHostory

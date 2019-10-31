@@ -76,5 +76,22 @@ namespace Health_Consulting_And_eChanneling.Areas.Administrator.Controllers
                 System.IO.File.Delete(fullpath1);
 
         }
+        public ActionResult Delete(int id)
+        {
+            using (Db db = new Db())
+            {
+                UserDTO dto = db.Users.Find(id);
+                db.Users.Remove(dto);
+                db.SaveChanges();
+            }
+
+            var originalDirectory = new DirectoryInfo(string.Format("{0}Content\\Registration", Server.MapPath(@"\")));
+            string pathString = Path.Combine(originalDirectory.ToString(), "Users\\" + id.ToString());
+
+            if (Directory.Exists(pathString))
+                Directory.Delete(pathString, true);
+
+            return RedirectToAction("Users");
+        }
     }
 }

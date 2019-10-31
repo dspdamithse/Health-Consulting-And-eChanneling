@@ -992,6 +992,7 @@
     <Content Include="Views\Account\UserProfile.cshtml" />
     <Content Include="Views\Shared\_Layout_Loggin_Registration.cshtml" />
     <Content Include="Views\Home\FooterPartialView.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

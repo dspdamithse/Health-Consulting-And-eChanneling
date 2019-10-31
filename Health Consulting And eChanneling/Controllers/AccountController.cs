@@ -270,6 +270,54 @@ namespace Health_Consulting_And_eChanneling.Controllers
 
             return Redirect("~/account/user-profile");
         }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            UserViewModel model;
+            using (Db db = new Db())
+            {
+                UserDTO dto = db.Users.Find(id);
+                if (dto == null)
+                {
+                    return Content("My Account is not available");
+                }
+                model = new UserViewModel(dto);
+            }
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Edit(UserViewModel model, HttpPostedFileBase file)
+        {
+            int id = model.Id;
+
+
+            using (Db db = new Db())
+            {
+                if (db.Doctors.Where(x => x.Id != id).Any(x => x.Username == model.Username))
+                {
+                    ModelState.AddModelError("", "Username Alredy exist");
+                    return View(model);
+                }
+            }
+            using (Db db = new Db())
+            {
+                UserDTO udto = db.Users.Find(id);
+                udto.FirstName = model.FirstName;
+                udto.LastName = model.LastName;
+                udto.EmailAddress = model.EmailAddress;
+                udto.Username = model.Username;
+                udto.RoleConfirm = 1;
+
+                db.SaveChanges();
+            }
+
+            TempData["SM"] = "Successfully Updated the User Profile";
+
+            return RedirectToAction("user-profile");
+        }
+
+
     }
 }
 

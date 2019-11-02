@@ -593,6 +593,7 @@
     <Content Include="Areas\Doctors\Views\Account\DoctorProfile.cshtml" />
     <Content Include="Areas\Doctors\Views\Account\Edit.cshtml" />
     <Content Include="Areas\Doctors\Views\Account\ResetPassword.cshtml" />
+    <Content Include="health_consulting_&amp;_echanneling_dumy.bak" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor.php" />
